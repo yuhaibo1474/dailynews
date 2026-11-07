@@ -1,27 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8">
-    <title>{{ page.title | default: site.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/digest.css' | relative_url }}">
-  </head>
+  {% include digest-head.html %}
   <body>
-    <a id="skip-to-content" href="#content">跳到内容</a>
-
-    <header class="page-header" role="banner">
-      <h1 class="project-name">{{ page.title | default: site.title }}</h1>
-      <h2 class="project-tagline">{{ site.description }}</h2>
-      <nav class="digest-nav" role="navigation" aria-label="板块导航"></nav>
-    </header>
+    {% include digest-header.html %}
 
     <main id="content" class="main-content" role="main">
+      <!-- ⬇ 内容插槽：动态日报正文，由 uv run horizon 生成，同步 UI 时勿动 -->
       {{ content }}
-      <footer class="site-footer">
-        <span class="site-footer-credits">由 <a href="https://github.com/Thysrael/Horizon">Horizon</a> 生成</span>
-      </footer>
+      <!-- ⬆ 内容插槽结束 -->
+      {% include digest-footer.html %}
     </main>
 
     <script src="{{ '/assets/js/digest.js' | relative_url }}"></script>
