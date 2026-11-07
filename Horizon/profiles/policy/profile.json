@@ -1,0 +1,31 @@
+{
+  "id": "policy",
+  "name": "Policy & Regulation",
+  "display_names": {
+    "zh": "政策"
+  },
+  "match": "match.md",
+  "analysis": "analysis.md",
+  "enrichment": {
+    "prompt": "enrichment.md",
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "section",
+        "tools": [],
+        "primary": true
+      },
+      {
+        "id": "background",
+        "type": "section",
+        "tools": ["web_search"]
+      },
+      {
+        "id": "impact",
+        "type": "section",
+        "tools": ["web_search"],
+        "optional": true
+      }
+    ]
+  }
+}

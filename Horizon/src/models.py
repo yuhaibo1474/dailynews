@@ -304,11 +304,20 @@ class RSSSourceConfig(BaseModel):
     """RSS feed source configuration."""
 
     name: str
-    url: HttpUrl
+    url: str
     enabled: bool = True
     category: Optional[str] = None
     content_extractor: Optional[str] = None
     profile: ProfileRoute = None
+    time_window_hours: Optional[int] = None
+
+    @field_validator("url")
+    @classmethod
+    def validate_url(cls, value: str) -> str:
+        value = value.strip()
+        if not value.startswith(("http://", "https://", "file://")):
+            raise ValueError("RSS URL must use http, https, or file scheme")
+        return value
 
 
 class RedditSubredditConfig(BaseModel):

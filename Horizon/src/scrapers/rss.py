@@ -5,7 +5,7 @@ import hashlib
 import logging
 import os
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional
 from email.utils import parsedate_to_datetime
 import httpx
@@ -19,6 +19,21 @@ logger = logging.getLogger(__name__)
 
 # Identify feed requests: some publishers reject httpx's default User-Agent.
 RSS_USER_AGENT = "Horizon/0.1.0 (+https://github.com/Thysrael/Horizon)"
+
+
+def _read_file_url(url: str) -> str:
+    """Read a local file referenced by a file:// URL (e.g. a bridged feed)."""
+    from pathlib import Path
+    from urllib.parse import unquote, urlparse
+
+    parsed = urlparse(url)
+    path = unquote(parsed.path)
+    if parsed.netloc:
+        path = f"//{parsed.netloc}{path}"
+    # On Windows, file:///C:/... arrives with a leading slash before the drive.
+    if len(path) >= 3 and path[0] == "/" and path[2] == ":":
+        path = path[1:]
+    return Path(path).read_text(encoding="utf-8")
 
 class RSSScraper(BaseScraper):
     """Scraper for RSS/Atom feeds."""
@@ -80,19 +95,28 @@ class RSSScraper(BaseScraper):
         """
         result = FetchResult()
 
+        # Allow a feed to override the global collection window (e.g. policy
+        # documents published every few days rather than every 24 hours).
+        if source.time_window_hours:
+            since = datetime.now(timezone.utc) - timedelta(hours=source.time_window_hours)
+
         # Expand environment variables in URL (e.g. ${LWN_TOKEN})
         feed_url = re.sub(
             r"\$\{(\w+)\}",
             lambda m: os.environ.get(m.group(1), m.group(0)).strip(),
             str(source.url),
         )
-        response = await self.client.get(
-            feed_url,
-            follow_redirects=True,
-            headers={"User-Agent": RSS_USER_AGENT},
-        )
-        response.raise_for_status()
-        feed = feedparser.parse(response.text)
+        if feed_url.startswith("file://"):
+            feed_text = _read_file_url(feed_url)
+        else:
+            response = await self.client.get(
+                feed_url,
+                follow_redirects=True,
+                headers={"User-Agent": RSS_USER_AGENT},
+            )
+            response.raise_for_status()
+            feed_text = response.text
+        feed = feedparser.parse(feed_text)
         if feed.bozo and not feed.entries:
             raise ValueError("Invalid RSS/Atom feed")
 

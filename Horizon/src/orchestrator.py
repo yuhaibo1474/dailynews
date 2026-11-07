@@ -338,10 +338,15 @@ class HorizonOrchestrator:
                     dest_path = safe_output_path(posts_dir, post_filename)
 
                     # Add Jekyll front matter
+                    digest_title = (
+                        f"Horizon 日报 · {today}"
+                        if lang == "zh"
+                        else f"Horizon Daily · {today}"
+                    )
                     front_matter = (
                         "---\n"
-                        "layout: default\n"
-                        f"title: \"Horizon Summary: {today} ({lang.upper()})\"\n"
+                        "layout: digest\n"
+                        f"title: \"{digest_title}\"\n"
                         f"date: {today}\n"
                         f"lang: {lang}\n"
                         "---\n\n"
