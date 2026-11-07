@@ -1,0 +1,787 @@
+// Horizon design system builder for Figma.
+// Source of truth for values: tokens/horizon.tokens.json (Tokens Studio format).
+// Run `node build.mjs` to embed the tokens and produce code.js.
+
+const TOKENS = /*__TOKENS__*/null;
+
+const reg = {};       // token path -> Variable
+const resolved = {};  // token path -> value in the first mode (used for raw fallbacks)
+const styles = {};    // text style key -> TextStyle
+const warnings = [];
+let semanticCollection = null;
+let modeIds = {};     // { Light, Dark } mode ids of the Semantic collection
+const fonts = {};     // { regular, bold }
+
+function warn(msg) { warnings.push(msg); }
+
+// ---------------------------------------------------------------- tokens ---
+
+function parseColor(s) {
+  s = String(s).trim();
+  let m = s.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (m) {
+    let h = m[1];
+    if (h.length === 3) h = h.split('').map((ch) => ch + ch).join('');
+    return { r: parseInt(h.slice(0, 2), 16) / 255, g: parseInt(h.slice(2, 4), 16) / 255, b: parseInt(h.slice(4, 6), 16) / 255, a: 1 };
+  }
+  m = s.match(/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i);
+  if (m) return { r: +m[1] / 255, g: +m[2] / 255, b: +m[3] / 255, a: m[4] === undefined ? 1 : +m[4] };
+  throw new Error('Unsupported color: ' + s);
+}
+
+function flatten(node, path, out) {
+  if (node && typeof node === 'object' && 'value' in node && 'type' in node) {
+    out.push({ path: path.join('.'), token: node });
+  } else if (node && typeof node === 'object') {
+    for (const k of Object.keys(node)) flatten(node[k], path.concat(k), out);
+  }
+  return out;
+}
+
+const figmaType = (t) => (t === 'color' ? 'COLOR' : t === 'fontFamilies' ? 'STRING' : 'FLOAT');
+const varName = (path) => path.replace(/\./g, '/');
+
+function cssName(collectionName, path) {
+  let p = path.split('.');
+  if (collectionName === 'Semantic' && p[0] === 'color') p = p.slice(1); // keep the site's --hz-bg style names
+  return '--hz-' + p.join('-');
+}
+
+function tokenValue(tok, type) {
+  const raw = tok.value;
+  if (typeof raw === 'string' && /^\{.+\}$/.test(raw)) {
+    const p = raw.slice(1, -1);
+    if (!reg[p]) throw new Error('Unresolved token reference: ' + raw);
+    return { alias: reg[p], aliasPath: p };
+  }
+  if (type === 'COLOR') return { value: parseColor(raw) };
+  if (type === 'STRING') return { value: String(raw) };
+  return { value: Number(raw) };
+}
+
+function semanticScopes(path) {
+  if (/^color\.(text|text-muted|link|on-accent|on-header|tab-text|tab-active-text|tag-text|score-text)$/.test(path)) return ['TEXT_FILL'];
+  if (path === 'color.border') return ['STROKE_COLOR'];
+  return ['FRAME_FILL', 'SHAPE_FILL', 'STROKE_COLOR'];
+}
+
+function componentScopes(path) {
+  if (/radius$/.test(path)) return ['CORNER_RADIUS'];
+  if (/border-width$/.test(path)) return ['STROKE_FLOAT'];
+  return ['GAP'];
+}
+
+function createCollection(name, modeSpecs, opts) {
+  opts = opts || {};
+  const col = figma.variables.createVariableCollection(name);
+  const modes = modeSpecs.map((m, i) => {
+    if (i === 0) {
+      col.renameMode(col.modes[0].modeId, m.mode);
+      return { id: col.modes[0].modeId, name: m.mode, set: m.set };
+    }
+    return { id: col.addMode(m.mode), name: m.mode, set: m.set };
+  });
+  const maps = modes.map((m) => {
+    const map = {};
+    flatten(TOKENS[m.set], [], []).forEach((e) => { map[e.path] = e.token; });
+    return map;
+  });
+  const entries = flatten(TOKENS[modeSpecs[0].set], [], []);
+  for (const e of entries) {
+    const type = figmaType(e.token.type);
+    const v = figma.variables.createVariable(varName(e.path), col, type);
+    try { v.setVariableCodeSyntax('WEB', 'var(' + cssName(name, e.path) + ')'); } catch (err) { warn('codeSyntax ' + e.path); }
+    if (opts.hidden) v.hiddenFromPublishing = true;
+    try {
+      if (name === 'Semantic') v.scopes = semanticScopes(e.path);
+      if (name === 'Component') v.scopes = componentScopes(e.path);
+    } catch (err) { warn('scopes ' + e.path); }
+    modes.forEach((m, i) => {
+      const tok = maps[i][e.path];
+      if (!tok) throw new Error('Token ' + e.path + ' missing from set ' + m.set);
+      const val = tokenValue(tok, type);
+      v.setValueForMode(m.id, val.alias ? figma.variables.createVariableAlias(val.alias) : val.value);
+      if (i === 0) resolved[e.path] = val.alias ? resolved[val.aliasPath] : val.value;
+    });
+    reg[e.path] = v;
+  }
+  return { col, modes };
+}
+
+function createVariables() {
+  createCollection('Primitives', [{ mode: 'Value', set: 'primitives' }], { hidden: true });
+  const sem = createCollection('Semantic', [
+    { mode: 'Light', set: 'semantic/light' },
+    { mode: 'Dark', set: 'semantic/dark' },
+  ]);
+  semanticCollection = sem.col;
+  sem.modes.forEach((m) => { modeIds[m.name] = m.id; });
+  createCollection('Component', [{ mode: 'Default', set: 'component' }]);
+}
+
+const need = (path) => {
+  if (!reg[path]) throw new Error('Unknown token: ' + path);
+  return reg[path];
+};
+
+// ------------------------------------------------------------ text styles ---
+
+async function loadFonts() {
+  const candidates = ['Noto Sans SC', 'Inter'];
+  for (const family of candidates) {
+    try {
+      const regular = { family, style: 'Regular' };
+      const bold = { family, style: 'Bold' };
+      await figma.loadFontAsync(regular);
+      await figma.loadFontAsync(bold);
+      fonts.regular = regular;
+      fonts.bold = bold;
+      if (family !== candidates[0]) warn('Noto Sans SC unavailable, fell back to ' + family);
+      return;
+    } catch (err) { /* try next family */ }
+  }
+  throw new Error('No usable font (Noto Sans SC / Inter) could be loaded.');
+}
+
+// [key, size token, weight, line-height %]
+const STYLE_DEFS = [
+  ['title', 'font.size.2xl', 'bold', 120],
+  ['title-m', 'font.size.title-mobile', 'bold', 120],
+  ['tagline', 'font.size.lg', 'regular', 140],
+  ['h2', 'font.size.xl', 'bold', 130],
+  ['body', 'font.size.base', 'regular', 150],
+  ['body-strong', 'font.size.base', 'bold', 150],
+  ['caption', 'font.size.sm', 'regular', 150],
+  ['tag', 'font.size.tag', 'regular', 150],
+  ['badge', 'font.size.xs', 'bold', 150],
+];
+
+function createTextStyles() {
+  for (const [key, sizeToken, weight, lh] of STYLE_DEFS) {
+    const st = figma.createTextStyle();
+    st.name = 'Horizon/' + key;
+    st.fontName = weight === 'bold' ? fonts.bold : fonts.regular;
+    st.fontSize = resolved[sizeToken];
+    st.lineHeight = { unit: 'PERCENT', value: lh };
+    try { st.setBoundVariable('fontSize', need(sizeToken)); } catch (err) { warn('style fontSize ' + key); }
+    styles[key] = st;
+  }
+}
+
+// ---------------------------------------------------------------- helpers ---
+
+function solidVar(path) {
+  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: { r: 0, g: 0, b: 0 } }, 'color', need(path));
+}
+const fillVar = (node, path) => { node.fills = [solidVar(path)]; };
+
+function strokeVar(node, path, weightToken) {
+  node.strokes = [solidVar(path)];
+  node.strokeAlign = 'INSIDE';
+  const w = weightToken || 'border.width.thin';
+  node.strokeWeight = resolved[w];
+  try { node.setBoundVariable('strokeTopWeight', need(w)); node.setBoundVariable('strokeBottomWeight', need(w)); node.setBoundVariable('strokeLeftWeight', need(w)); node.setBoundVariable('strokeRightWeight', need(w)); } catch (err) { warn('strokeWeight ' + w); }
+}
+
+// Only the left edge is stroked (callout, source line).
+function leftStrokeVar(node, colorPath, weightToken) {
+  node.strokes = [solidVar(colorPath)];
+  node.strokeAlign = 'INSIDE';
+  node.strokeTopWeight = 0; node.strokeBottomWeight = 0; node.strokeRightWeight = 0;
+  node.strokeLeftWeight = resolved[weightToken];
+  try { node.setBoundVariable('strokeLeftWeight', need(weightToken)); } catch (err) { warn('strokeLeftWeight ' + weightToken); }
+}
+
+function num(node, field, path) {
+  node[field] = resolved[path]; // raw value first, so a failed binding still renders correctly
+  try { node.setBoundVariable(field, need(path)); } catch (err) { warn(field + ' <- ' + path + ': ' + err.message); }
+}
+
+function pad(node, xPath, yPath) {
+  num(node, 'paddingLeft', xPath); num(node, 'paddingRight', xPath);
+  num(node, 'paddingTop', yPath); num(node, 'paddingBottom', yPath);
+}
+
+function radius(node, path) {
+  ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius'].forEach((f) => num(node, f, path));
+}
+
+function initBox(f, dir) {
+  f.layoutMode = dir;
+  f.primaryAxisSizingMode = 'AUTO';
+  f.counterAxisSizingMode = 'AUTO';
+  f.fills = [];
+  f.clipsContent = false;
+  return f;
+}
+
+const box = (name, dir) => { const f = figma.createFrame(); f.name = name; return initBox(f, dir); };
+
+// Fixed width, hugging height (for variants that must fill their container on instances).
+function fixedWidth(node, w) {
+  node.layoutSizingHorizontal = 'FIXED';
+  node.resize(w, node.height);
+  node.layoutSizingVertical = 'HUG';
+}
+
+async function mkText(chars, styleKey, colorPath, name) {
+  const t = figma.createText();
+  t.name = name || styleKey;
+  const st = styles[styleKey];
+  t.fontName = st.fontName;
+  t.characters = chars;
+  await t.setTextStyleIdAsync(st.id);
+  fillVar(t, colorPath);
+  return t;
+}
+
+function fillWidth(node) {
+  node.layoutSizingHorizontal = 'FILL';
+  if (node.type === 'TEXT') node.textAutoResize = 'HEIGHT';
+}
+
+function setGradient(node) {
+  const stops = ['color.header-start', 'color.header-mid', 'color.header-end'].map((p, i) => ({
+    position: i / 2,
+    color: resolved[p],
+    boundVariables: { color: figma.variables.createVariableAlias(need(p)) },
+  }));
+  // CSS linear-gradient(120deg, ...) expressed as a Figma gradient transform.
+  const paint = { type: 'GRADIENT_LINEAR', gradientStops: stops, gradientTransform: [[0.866, 0.5, -0.183], [-0.5, 0.866, 0.317]] };
+  try {
+    node.fills = [paint];
+  } catch (err) {
+    warn('gradient variable binding unsupported, using raw colors');
+    paint.gradientStops = stops.map((s) => ({ position: s.position, color: s.color }));
+    node.fills = [paint];
+  }
+}
+
+function propKey(instance, name) {
+  const key = Object.keys(instance.componentProperties).find((k) => k.indexOf(name + '#') === 0);
+  if (!key) throw new Error('Property not found: ' + name);
+  return key;
+}
+const setText = (inst, name, value) => inst.setProperties({ [propKey(inst, name)]: value });
+
+function arrange(comps, maxRowWidth) {
+  let x = 0, y = 0, rowH = 0;
+  for (const c of comps) {
+    if (x > 0 && x + c.width > maxRowWidth) { x = 0; y += rowH + 16; rowH = 0; }
+    c.x = x; c.y = y;
+    x += c.width + 16;
+    rowH = Math.max(rowH, c.height);
+  }
+}
+
+function makeStage(page, name, gradient) {
+  const st = figma.createFrame();
+  st.name = name;
+  st.clipsContent = true;
+  if (gradient) setGradient(st); else fillVar(st, 'color.bg');
+  page.appendChild(st);
+  return st;
+}
+
+// Combine variants into a set inside a stage and wire text properties to named layers.
+function finishSet(stage, name, comps, description, textProps) {
+  comps.forEach((c) => stage.appendChild(c));
+  arrange(comps, 720);
+  const set = figma.combineAsVariants(comps, stage);
+  set.name = name;
+  set.description = description;
+  for (const p of textProps || []) {
+    const key = set.addComponentProperty(p.name, 'TEXT', p.def);
+    set.children.forEach((c) => {
+      const node = c.findOne((n) => n.type === 'TEXT' && n.name === p.node);
+      if (node) node.componentPropertyReferences = { characters: key };
+    });
+  }
+  set.x = 32; set.y = 32;
+  stage.resize(set.width + 64, set.height + 64);
+  return set;
+}
+
+function finishSingle(stage, comp, description, textProps) {
+  stage.appendChild(comp);
+  comp.description = description;
+  for (const p of textProps || []) {
+    const key = comp.addComponentProperty(p.name, 'TEXT', p.def);
+    const node = comp.findOne((n) => n.type === 'TEXT' && n.name === p.node);
+    if (node) node.componentPropertyReferences = { characters: key };
+  }
+  comp.x = 32; comp.y = 32;
+  stage.resize(comp.width + 64, comp.height + 64);
+  return comp;
+}
+
+// ------------------------------------------------------------- components ---
+
+async function buildTab(page) {
+  const defs = [
+    ['default', 'color.tab-bg', 'color.tab-text', 'body'],
+    ['hover', 'color.tab-bg-hover', 'color.tab-text', 'body'],
+    ['active', 'color.tab-active-bg', 'color.tab-active-text', 'body-strong'],
+  ];
+  const comps = [];
+  for (const [state, bg, fg, st] of defs) {
+    const c = figma.createComponent();
+    initBox(c, 'HORIZONTAL');
+    c.name = 'State=' + state;
+    fillVar(c, bg);
+    strokeVar(c, 'color.tab-border');
+    pad(c, 'component.tab.padding-x', 'component.tab.padding-y');
+    radius(c, 'component.tab.radius');
+    c.primaryAxisAlignItems = 'CENTER';
+    c.counterAxisAlignItems = 'CENTER';
+    c.appendChild(await mkText('AI资讯', st, fg, 'label'));
+    comps.push(c);
+  }
+  const stage = makeStage(page, 'Stage / Header surface', true);
+  return { stage, set: finishSet(stage, 'Tab', comps, 'CSS: .digest-tab (.active, :hover). Header nav button.', [{ name: 'Label', def: 'AI资讯', node: 'label' }]) };
+}
+
+async function buildScoreBadge(page) {
+  const comps = [];
+  for (const tier of ['high', 'good', 'mid', 'low']) {
+    const c = figma.createComponent();
+    initBox(c, 'HORIZONTAL');
+    c.name = 'Tier=' + tier;
+    fillVar(c, 'color.score-' + tier);
+    pad(c, 'component.badge.padding-x', 'component.badge.padding-y');
+    radius(c, 'component.badge.radius');
+    c.counterAxisAlignItems = 'CENTER';
+    c.appendChild(await mkText('7.0', 'badge', 'color.score-text', 'score'));
+    comps.push(c);
+  }
+  const stage = makeStage(page, 'Stage / Score Badge', false);
+  return { stage, set: finishSet(stage, 'Score Badge', comps, 'CSS: .score-badge[data-tier="high|good|mid|low"]', [{ name: 'Score', def: '7.0', node: 'score' }]) };
+}
+
+async function buildTag(page) {
+  const c = figma.createComponent();
+  initBox(c, 'HORIZONTAL');
+  c.name = 'Tag';
+  fillVar(c, 'color.tag-bg');
+  pad(c, 'component.tag.padding-x', 'component.tag.padding-y');
+  radius(c, 'component.tag.radius');
+  c.appendChild(await mkText('ai-news', 'tag', 'color.tag-text', 'label'));
+  const stage = makeStage(page, 'Stage / Tag', false);
+  return { stage, comp: finishSingle(stage, c, 'CSS: .tag-line code', [{ name: 'Label', def: 'ai-news', node: 'label' }]) };
+}
+
+async function buildLangToggle(page) {
+  const comps = [];
+  for (const pos of ['first', 'last']) {
+    for (const active of ['false', 'true']) {
+      const c = figma.createComponent();
+      initBox(c, 'HORIZONTAL');
+      c.name = 'Position=' + pos + ', Active=' + active;
+      fillVar(c, active === 'true' ? 'color.toggle-active-bg' : 'color.toggle-bg');
+      strokeVar(c, 'color.tab-border');
+      pad(c, 'component.toggle.padding-x', 'component.toggle.padding-y');
+      const r = 'component.toggle.radius';
+      const zero = 'space.0';
+      const left = pos === 'first' ? r : zero;
+      const right = pos === 'first' ? zero : r;
+      num(c, 'topLeftRadius', left); num(c, 'bottomLeftRadius', left);
+      num(c, 'topRightRadius', right); num(c, 'bottomRightRadius', right);
+      c.primaryAxisAlignItems = 'CENTER';
+      c.counterAxisAlignItems = 'CENTER';
+      c.appendChild(await mkText(pos === 'first' ? '中文' : 'EN', 'caption', 'color.on-header', 'label'));
+      comps.push(c);
+    }
+  }
+  const stage = makeStage(page, 'Stage / Lang Toggle', true);
+  return { stage, set: finishSet(stage, 'Lang Toggle', comps, 'CSS: .lang-toggle button (.active). Place two: first + last.', [{ name: 'Label', def: '中文', node: 'label' }]) };
+}
+
+async function buildCallout(page) {
+  const c = figma.createComponent();
+  initBox(c, 'VERTICAL');
+  c.name = 'Callout';
+  leftStrokeVar(c, 'color.accent', 'component.callout.border-width');
+  pad(c, 'component.callout.padding-x', 'component.callout.padding-y');
+  const t = await mkText('从 59 条内容中筛选出 23 条重要资讯。', 'body', 'color.text-muted', 'text');
+  c.appendChild(t);
+  fixedWidth(c, 640);
+  fillWidth(t);
+  const stage = makeStage(page, 'Stage / Callout', false);
+  return { stage, comp: finishSingle(stage, c, 'CSS: .main-content > blockquote:first-of-type', [{ name: 'Text', def: t.characters, node: 'text' }]) };
+}
+
+async function buildSourceLine(page) {
+  const c = figma.createComponent();
+  initBox(c, 'HORIZONTAL');
+  c.name = 'Source Line';
+  leftStrokeVar(c, 'color.accent', 'component.source-line.border-width');
+  c.paddingLeft = resolved['component.source-line.padding-left'];
+  try { c.setBoundVariable('paddingLeft', need('component.source-line.padding-left')); } catch (err) { warn('source-line padding'); }
+  c.appendChild(await mkText('来源: Hacker News · 2026-11-07', 'caption', 'color.text-muted', 'text'));
+  const stage = makeStage(page, 'Stage / Source Line', false);
+  return { stage, comp: finishSingle(stage, c, 'CSS: .source-line', [{ name: 'Source', def: '来源: Hacker News · 2026-11-07', node: 'text' }]) };
+}
+
+async function buildNewsItem(page, badgeSet) {
+  const c = figma.createComponent();
+  initBox(c, 'HORIZONTAL');
+  c.name = 'News Item';
+  c.counterAxisAlignItems = 'CENTER';
+  num(c, 'itemSpacing', 'component.news-item.gap');
+  num(c, 'paddingTop', 'component.news-item.padding-y');
+  num(c, 'paddingBottom', 'component.news-item.padding-y');
+  const idx = await mkText('1.', 'body', 'color.text-muted', 'index');
+  const title = await mkText('Libghostty 发布 1.0 版本', 'body', 'color.link', 'title');
+  const badge = badgeSet.defaultVariant.createInstance();
+  badge.name = 'badge';
+  c.appendChild(idx); c.appendChild(title); c.appendChild(badge);
+  fixedWidth(c, 640);
+  title.layoutSizingHorizontal = 'FILL';
+  title.textAutoResize = 'HEIGHT';
+  const stage = makeStage(page, 'Stage / News Item', false);
+  stage.appendChild(c);
+  c.description = 'CSS: TOC list row (.main-content > ol > li) with .score-badge';
+  const kIdx = c.addComponentProperty('Index', 'TEXT', '1.');
+  const kTitle = c.addComponentProperty('Title', 'TEXT', title.characters);
+  const preferred = badgeSet.children.map((v) => ({ type: 'COMPONENT', key: v.key }));
+  const kBadge = c.addComponentProperty('Badge', 'INSTANCE_SWAP', badgeSet.defaultVariant.id, { preferredValues: preferred });
+  idx.componentPropertyReferences = { characters: kIdx };
+  title.componentPropertyReferences = { characters: kTitle };
+  badge.componentPropertyReferences = { mainComponent: kBadge };
+  c.x = 32; c.y = 32;
+  stage.resize(c.width + 64, c.height + 64);
+  return { stage, comp: c };
+}
+
+async function buildDetails(page) {
+  const comps = [];
+  for (const open of ['false', 'true']) {
+    const c = figma.createComponent();
+    initBox(c, 'VERTICAL');
+    c.name = 'Open=' + open;
+    strokeVar(c, 'color.border');
+    radius(c, 'component.details.radius');
+    pad(c, 'component.details.padding-x', 'component.details.padding-y');
+    num(c, 'itemSpacing', 'component.details.gap');
+    const summary = await mkText('参考链接', 'body-strong', 'color.text-muted', 'summary');
+    c.appendChild(summary);
+    if (open === 'true') {
+      const refs = box('refs', 'VERTICAL');
+      num(refs, 'itemSpacing', 'component.details.gap');
+      refs.appendChild(await mkText('Hacker News 讨论', 'body', 'color.link', 'ref'));
+      refs.appendChild(await mkText('原文链接', 'body', 'color.link', 'ref'));
+      c.appendChild(refs);
+    }
+    fixedWidth(c, 640);
+    comps.push(c);
+  }
+  const stage = makeStage(page, 'Stage / Details', false);
+  return { stage, set: finishSet(stage, 'Details', comps, 'CSS: .main-content details (collapsible references)', [{ name: 'Summary', def: '参考链接', node: 'summary' }]) };
+}
+
+async function buildFooter(page) {
+  const c = figma.createComponent();
+  initBox(c, 'HORIZONTAL');
+  c.name = 'Footer';
+  c.primaryAxisAlignItems = 'CENTER';
+  pad(c, 'space.0', 'space.16');
+  const t = await mkText('由 Horizon 生成', 'caption', 'color.text-muted', 'credit');
+  t.textAlignHorizontal = 'CENTER';
+  c.appendChild(t);
+  fixedWidth(c, 640);
+  fillWidth(t);
+  const stage = makeStage(page, 'Stage / Footer', false);
+  return { stage, comp: finishSingle(stage, c, 'CSS: .site-footer', [{ name: 'Credit', def: '由 Horizon 生成', node: 'credit' }]) };
+}
+
+async function buildHeader(page, tabSet) {
+  const comps = [];
+  for (const bp of ['desktop', 'mobile']) {
+    const m = bp === 'mobile';
+    const c = figma.createComponent();
+    initBox(c, 'VERTICAL');
+    c.name = 'Breakpoint=' + bp;
+    setGradient(c);
+    pad(c, 'component.header.padding-x-' + bp, 'component.header.padding-y-' + bp);
+    num(c, 'itemSpacing', 'component.header.gap');
+    c.counterAxisAlignItems = 'CENTER';
+    const title = await mkText('Horizon 日报', m ? 'title-m' : 'title', 'color.on-header', 'title');
+    const tagline = await mkText('AI-curated daily digest of tech and research news', 'tagline', 'color.on-header', 'tagline');
+    const nav = box('nav', 'HORIZONTAL');
+    nav.layoutWrap = 'WRAP';
+    nav.primaryAxisAlignItems = 'CENTER';
+    num(nav, 'itemSpacing', 'space.8');
+    num(nav, 'counterAxisSpacing', 'space.8');
+    c.appendChild(title); c.appendChild(tagline); c.appendChild(nav);
+    ['AI资讯', '科技博客', '财经', '政策'].forEach((label, i) => {
+      const tab = tabSet.defaultVariant.createInstance();
+      nav.appendChild(tab);
+      tab.setProperties({ State: i === 0 ? 'active' : 'default' });
+      setText(tab, 'Label', label);
+    });
+    fixedWidth(c, m ? resolved['size.bp-mobile'] : resolved['size.bp-desktop']);
+    [title, tagline].forEach((t) => { t.textAlignHorizontal = 'CENTER'; fillWidth(t); });
+    nav.layoutSizingHorizontal = 'FILL';
+    comps.push(c);
+  }
+  const stage = makeStage(page, 'Stage / Page Header', false);
+  const set = finishSet(stage, 'Page Header', comps, 'CSS: .page-header (+ .digest-nav). Breakpoint constrains width and padding.', [
+    { name: 'Title', def: 'Horizon 日报', node: 'title' },
+    { name: 'Tagline', def: 'AI-curated daily digest of tech and research news', node: 'tagline' },
+  ]);
+  return { stage, set };
+}
+
+async function buildSwatch(page) {
+  const c = figma.createComponent();
+  initBox(c, 'VERTICAL');
+  c.name = 'Doc / Swatch';
+  num(c, 'itemSpacing', 'space.4');
+  const chip = figma.createFrame();
+  chip.name = 'chip';
+  chip.resize(96, 56);
+  fillVar(chip, 'color.bg');
+  strokeVar(chip, 'color.border');
+  radius(chip, 'radius.md');
+  c.appendChild(chip);
+  c.appendChild(await mkText('token', 'caption', 'color.text', 'label'));
+  const stage = makeStage(page, 'Stage / Doc Swatch', false);
+  return { stage, comp: finishSingle(stage, c, 'Documentation helper used on the Foundations page.', [{ name: 'Label', def: 'token', node: 'label' }]) };
+}
+
+// ------------------------------------------------------------------ pages ---
+
+const SAMPLE_ITEMS = [
+  ['Libghostty 发布 1.0 版本', 7.0],
+  ['约 60 万块 Nvidia H200 芯片滞留香港，北京限制进口许可', 7.0],
+  ['METR 审计称 Anthropic 或已于 7 月触及自身 AI 加速预警阈值', 7.0],
+  ['CoreWeave 债券收益率突破 16%，AI 数据中心融资成本上升', 8.0],
+  ['与设计师协作：一次只留一个，设计系统有代价', 6.0],
+];
+
+function tierOf(score) { return score >= 8 ? 'high' : score >= 7 ? 'good' : score >= 6 ? 'mid' : 'low'; }
+
+async function buildSamplePage(parts, bp, modeName) {
+  const m = bp === 'mobile';
+  const f = figma.createFrame();
+  initBox(f, 'VERTICAL');
+  f.name = 'Page / ' + bp + ' / ' + modeName;
+  fixedWidth(f, m ? resolved['size.bp-mobile'] : resolved['size.bp-desktop']);
+  fillVar(f, 'color.bg');
+  f.setExplicitVariableModeForCollection(semanticCollection, modeIds[modeName]);
+
+  const header = parts.header.children.find((c) => c.name === 'Breakpoint=' + bp).createInstance();
+  f.appendChild(header);
+  header.layoutSizingHorizontal = 'FILL';
+
+  const main = box('Main', 'VERTICAL');
+  pad(main, 'component.content.padding-x-' + bp, 'component.content.padding-y');
+  num(main, 'itemSpacing', 'component.content.gap');
+  f.appendChild(main);
+  main.layoutSizingHorizontal = 'FILL';
+
+  const callout = parts.callout.createInstance();
+  main.appendChild(callout); callout.layoutSizingHorizontal = 'FILL';
+  main.appendChild(await mkText('AI 资讯', 'h2', 'color.text', 'heading'));
+
+  for (let i = 0; i < SAMPLE_ITEMS.length; i++) {
+    const [title, score] = SAMPLE_ITEMS[i];
+    const item = parts.newsItem.createInstance();
+    main.appendChild(item);
+    item.layoutSizingHorizontal = 'FILL';
+    setText(item, 'Index', (i + 1) + '.');
+    setText(item, 'Title', title);
+    const variant = parts.badge.children.find((v) => v.name === 'Tier=' + tierOf(score));
+    item.setProperties({ [propKey(item, 'Badge')]: variant.id });
+    const badge = item.findOne((n) => n.type === 'INSTANCE');
+    if (badge) setText(badge, 'Score', score.toFixed(1));
+  }
+
+  const row = box('Meta', 'HORIZONTAL');
+  num(row, 'itemSpacing', 'space.12');
+  row.counterAxisAlignItems = 'CENTER';
+  main.appendChild(row);
+  row.appendChild(parts.source.createInstance());
+  row.appendChild(parts.tag.createInstance());
+
+  const det = parts.details.defaultVariant.createInstance();
+  main.appendChild(det); det.layoutSizingHorizontal = 'FILL';
+  const detOpen = parts.details.children.find((v) => v.name === 'Open=true').createInstance();
+  main.appendChild(detOpen); detOpen.layoutSizingHorizontal = 'FILL';
+
+  const footer = parts.footer.createInstance();
+  main.appendChild(footer); footer.layoutSizingHorizontal = 'FILL';
+  return f;
+}
+
+async function buildFoundations(page, swatch) {
+  const colorPaths = Object.keys(reg).filter((p) => /^color\./.test(p) && !/^color\.(indigo|rose|sunrise|orange|gold|purple|parchment|ink|lavender|night|moon|twilight|teal|white|black)\./.test(p));
+  let x = 0;
+  for (const modeName of ['Light', 'Dark']) {
+    const f = figma.createFrame();
+    initBox(f, 'VERTICAL');
+    f.name = 'Semantic colors / ' + modeName;
+    fixedWidth(f, 760);
+    fillVar(f, 'color.bg');
+    f.setExplicitVariableModeForCollection(semanticCollection, modeIds[modeName]);
+    pad(f, 'space.24', 'space.24');
+    num(f, 'itemSpacing', 'space.16');
+    page.appendChild(f);
+    f.appendChild(await mkText('Semantic colors — ' + modeName, 'h2', 'color.text', 'heading'));
+    const grid = box('grid', 'HORIZONTAL');
+    grid.layoutWrap = 'WRAP';
+    num(grid, 'itemSpacing', 'space.16');
+    num(grid, 'counterAxisSpacing', 'space.16');
+    f.appendChild(grid);
+    grid.layoutSizingHorizontal = 'FILL';
+    for (const p of colorPaths) {
+      const inst = swatch.createInstance();
+      grid.appendChild(inst);
+      const chip = inst.findOne((n) => n.name === 'chip');
+      fillVar(chip, p);
+      setText(inst, 'Label', p.replace('color.', ''));
+    }
+    f.x = x; f.y = 0;
+    x += 760 + 80;
+  }
+  const spec = figma.createFrame();
+  initBox(spec, 'VERTICAL');
+  spec.name = 'Type specimens';
+  fixedWidth(spec, 760);
+  fillVar(spec, 'color.bg');
+  pad(spec, 'space.24', 'space.24');
+  num(spec, 'itemSpacing', 'space.12');
+  page.appendChild(spec);
+  for (const [key, sizeToken] of STYLE_DEFS) {
+    spec.appendChild(await mkText('Horizon 日报 Aa 123 — ' + key + ' (' + resolved[sizeToken] + 'px)', key, key === 'title' || key === 'title-m' || key === 'tagline' ? 'color.link' : 'color.text', key));
+  }
+  spec.x = x; spec.y = 0;
+}
+
+// ------------------------------------------------------------------ build ---
+
+async function build() {
+  const existing = await figma.variables.getLocalVariableCollectionsAsync();
+  if (existing.some((c) => ['Primitives', 'Semantic', 'Component'].includes(c.name))) {
+    figma.closePlugin('Horizon collections already exist. Run on a clean file (or delete them first).');
+    return;
+  }
+  await loadFonts();
+  createVariables();
+  createTextStyles();
+
+  const foundations = figma.root.children[0];
+  foundations.name = 'Foundations';
+  const compPage = figma.createPage(); compPage.name = 'Components';
+  const pagesPage = figma.createPage(); pagesPage.name = 'Pages';
+
+  await figma.setCurrentPageAsync(compPage);
+  const stages = [];
+  const swatch = await buildSwatch(compPage); stages.push(swatch.stage);
+  const tab = await buildTab(compPage); stages.push(tab.stage);
+  const badge = await buildScoreBadge(compPage); stages.push(badge.stage);
+  const tag = await buildTag(compPage); stages.push(tag.stage);
+  const toggle = await buildLangToggle(compPage); stages.push(toggle.stage);
+  const callout = await buildCallout(compPage); stages.push(callout.stage);
+  const source = await buildSourceLine(compPage); stages.push(source.stage);
+  const newsItem = await buildNewsItem(compPage, badge.set); stages.push(newsItem.stage);
+  const details = await buildDetails(compPage); stages.push(details.stage);
+  const footer = await buildFooter(compPage); stages.push(footer.stage);
+  const header = await buildHeader(compPage, tab.set); stages.push(header.stage);
+  let y = 0;
+  for (const st of stages) { st.x = 0; st.y = y; y += st.height + 48; }
+
+  await figma.setCurrentPageAsync(foundations);
+  await buildFoundations(foundations, swatch.comp);
+
+  await figma.setCurrentPageAsync(pagesPage);
+  const parts = { header: header.set, callout: callout.comp, newsItem: newsItem.comp, badge: badge.set, source: source.comp, tag: tag.comp, details: details.set, footer: footer.comp };
+  let x = 0;
+  for (const [bp, mode] of [['desktop', 'Light'], ['desktop', 'Dark'], ['mobile', 'Light'], ['mobile', 'Dark']]) {
+    const f = await buildSamplePage(parts, bp, mode);
+    pagesPage.appendChild(f);
+    f.x = x; f.y = 0;
+    x += f.width + 80;
+  }
+  await figma.setCurrentPageAsync(compPage);
+  figma.viewport.scrollAndZoomIntoView(compPage.children);
+  figma.closePlugin('Horizon design system built.' + (warnings.length ? ' Warnings: ' + warnings.length + ' (' + warnings.slice(0, 3).join('; ') + ')' : ''));
+}
+
+// ----------------------------------------------------------------- export ---
+
+async function exportTokens() {
+  const cols = (await figma.variables.getLocalVariableCollectionsAsync()).filter((c) => ['Primitives', 'Semantic', 'Component'].indexOf(c.name) >= 0);
+  const all = await figma.variables.getLocalVariablesAsync();
+  const byId = {};
+  all.forEach((v) => { byId[v.id] = v; });
+
+  const nameOf = (v) => {
+    const syn = v.codeSyntax && v.codeSyntax.WEB;
+    const m = syn && syn.match(/var\((--[^)]+)\)/);
+    return m ? m[1] : '--hz-' + v.name.replace(/\//g, '-');
+  };
+  const hex = (n) => Math.round(n * 255).toString(16).padStart(2, '0');
+  const css = (v, val) => {
+    if (val && val.type === 'VARIABLE_ALIAS') return 'var(' + nameOf(byId[val.id]) + ')';
+    if (v.resolvedType === 'COLOR') {
+      return val.a >= 1 ? '#' + hex(val.r) + hex(val.g) + hex(val.b)
+        : 'rgba(' + Math.round(val.r * 255) + ', ' + Math.round(val.g * 255) + ', ' + Math.round(val.b * 255) + ', ' + +val.a.toFixed(3) + ')';
+    }
+    if (v.resolvedType === 'FLOAT') return /font\/weight|line\/height/.test(v.name) ? String(val) : val + 'px';
+    return String(val);
+  };
+
+  const root = [], dark = [], json = [];
+  let count = 0;
+  for (const col of cols) {
+    const entry = { name: col.name, modes: col.modes.map((m) => m.name), variables: [] };
+    for (const v of all.filter((x) => x.variableCollectionId === col.id)) {
+      count++;
+      const values = {};
+      col.modes.forEach((m) => {
+        const val = v.valuesByMode[m.modeId];
+        values[m.name] = val && val.type === 'VARIABLE_ALIAS' ? { alias: byId[val.id].name } : (v.resolvedType === 'COLOR' ? css(v, val) : val);
+      });
+      entry.variables.push({ name: v.name, css: nameOf(v), type: v.resolvedType, values });
+      const light = css(v, v.valuesByMode[col.modes[0].modeId]);
+      root.push('  ' + nameOf(v) + ': ' + light + ';');
+      if (col.modes.length > 1) {
+        const d = css(v, v.valuesByMode[col.modes[1].modeId]);
+        if (d !== light) dark.push('    ' + nameOf(v) + ': ' + d + ';');
+      }
+    }
+    json.push(entry);
+  }
+  const text = '/* Generated from Figma by the Horizon plugin. Do not edit by hand. */\n:root {\n' + root.join('\n') +
+    '\n}\n\n@media (prefers-color-scheme: dark) {\n  :root {\n' + dark.join('\n') + '\n  }\n}\n';
+  figma.showUI(__html__, { width: 360, height: 280 });
+  figma.ui.postMessage({ type: 'export', css: text, json: JSON.stringify({ collections: json }, null, 2), count });
+}
+
+async function exportShell() {
+  const comps = figma.root.findAll((n) => (n.type === 'COMPONENT' || n.type === 'COMPONENT_SET') && (n.name === 'Page Header' || n.name === 'Footer'));
+  const shell = { site: {}, footer: {} };
+  for (const c of comps) {
+    const defs = c.componentPropertyDefinitions || {};
+    if (c.name === 'Page Header') {
+      if (defs.Title) shell.site.title = defs.Title.defaultValue;
+      if (defs.Tagline) shell.site.tagline = defs.Tagline.defaultValue;
+    } else if (c.name === 'Footer') {
+      if (defs.Credit) shell.footer.credit = defs.Credit.defaultValue;
+    }
+  }
+  const json = JSON.stringify(shell, null, 2);
+  figma.showUI(__html__, { width: 360, height: 260 });
+  figma.ui.postMessage({ type: 'export-shell', json, text: json });
+}
+
+(async () => {
+  try {
+    if (figma.command === 'export') await exportTokens();
+    else if (figma.command === 'export-shell') await exportShell();
+    else await build();
+  } catch (err) {
+    figma.closePlugin('Horizon plugin failed: ' + (err && err.message ? err.message : err));
+  }
+})();

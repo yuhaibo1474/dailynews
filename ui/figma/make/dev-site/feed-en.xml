@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Horizon Daily - English Digest</title>
+  <link href="http://0.0.0.0:3000/feed-en.xml" rel="self"/>
+  <link href="http://0.0.0.0:3000/"/>
+  <updated>2026-11-07T07:58:05+00:00</updated>
+  <id>http://0.0.0.0:3000/</id>
+  
+  
+</feed>

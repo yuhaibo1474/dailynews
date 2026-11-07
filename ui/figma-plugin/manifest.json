@@ -1,0 +1,15 @@
+{
+  "name": "Horizon Design System",
+  "id": "horizon-design-system-local",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": { "allowedDomains": ["none"] },
+  "menu": [
+    { "name": "1. Build design system (Variables + Components + Pages)", "command": "build" },
+    { "name": "2. Export tokens (CSS + JSON)", "command": "export" },
+    { "name": "3. Export shell (JSON)", "command": "export-shell" }
+  ]
+}

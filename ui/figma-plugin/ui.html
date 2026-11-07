@@ -1,0 +1,39 @@
+<style>
+  body { font: 12px/1.5 Inter, system-ui, sans-serif; margin: 16px; color: #2d2a3e; }
+  button { display: block; width: 100%; margin: 8px 0; padding: 8px; font: inherit; cursor: pointer; }
+  textarea { width: 100%; height: 90px; font: 11px monospace; }
+</style>
+<p id="info">Reading...</p>
+<button id="css" disabled>Download horizon-tokens.css</button>
+<button id="json" disabled>Download figma-variables.json</button>
+<button id="shell" disabled>Download shell.json</button>
+<textarea id="preview" readonly></textarea>
+<script>
+  let data = {};
+  const $ = (id) => document.getElementById(id);
+  function download(name, text, type) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type }));
+    a.download = name;
+    a.click();
+  }
+  onmessage = (e) => {
+    const m = e.data.pluginMessage;
+    if (!m) return;
+    if (m.type === 'export') {
+      data = { css: m.css, json: m.json };
+      $('info').textContent = m.count + ' variables exported.';
+      $('preview').value = m.css;
+      $('css').disabled = false;
+      $('json').disabled = false;
+    } else if (m.type === 'export-shell') {
+      data = { shell: m.json };
+      $('info').textContent = 'Shell exported.';
+      $('preview').value = m.text;
+      $('shell').disabled = false;
+    }
+  };
+  $('css').onclick = () => download('horizon-tokens.css', data.css, 'text/css');
+  $('json').onclick = () => download('figma-variables.json', data.json, 'application/json');
+  $('shell').onclick = () => download('shell.json', data.shell, 'application/json');
+</script>

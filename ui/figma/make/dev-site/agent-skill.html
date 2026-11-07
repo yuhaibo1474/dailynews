@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.9.1 -->
+<title>Agent Skill | Horizon Daily</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Agent Skill" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="AI-curated daily digest of tech and research news" />
+<meta name="twitter:description" property="og:description" content="AI-curated daily digest of tech and research news" />
+<link rel="canonical" href="http://0.0.0.0:3000/agent-skill.html" />
+<meta property="og:url" content="http://0.0.0.0:3000/agent-skill.html" />
+<meta property="og:site_name" content="Horizon Daily" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Agent Skill" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"AI-curated daily digest of tech and research news","headline":"Agent Skill","url":"http://0.0.0.0:3000/agent-skill.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌅</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌅</text></svg>">
+<link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌅</text></svg>">
+<link rel="alternate" type="application/rss+xml" title="Horizon Daily RSS (All)" href="/feed.xml">
+<link rel="alternate" type="application/atom+xml" title="Horizon Daily RSS (ZH)" href="/feed-zh.xml">
+<link rel="alternate" type="application/atom+xml" title="Horizon Daily RSS (EN)" href="/feed-en.xml">
+<link rel="stylesheet" href="/assets/css/horizon.css">
+<style>
+.rss-icon{opacity:.6;color:inherit;margin-left:12px;vertical-align:middle;text-decoration:none;transition:all .2s}
+.rss-icon:hover{opacity:1;color:#f26522}
+.rss-icon svg{width:0.9em;height:0.9em;display:inline-block}
+@media(prefers-color-scheme:dark){body{background:#1a1726!important;color:#e8e4f0!important}}
+</style>
+<script src="/assets/js/horizon.js" defer></script>
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">Agent Skill</h1>
+      <h2 class="project-tagline">AI-curated daily digest of tech and research news</h2>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h1 id="horizon-agent-skill">Horizon Agent Skill</h1>
+
+<p>The <a href="https://github.com/Thysrael/Horizon/tree/main/skills/horizon">Horizon skill</a>
+helps an AI assistant configure a news radar, generate and tune digests, create
+Profiles, schedule delivery, and contribute code. Horizon continues to run the
+AI pipeline with the model and credentials in its own configuration.</p>
+
+<h2 id="install">Install</h2>
+
+<p>Choose one of the installation methods below. You can install the skill first,
+then ask your assistant to install and configure Horizon. With shell and network
+access, the assistant can prepare a checkout and its Python environment using
+the <a href="https://github.com/Thysrael/Horizon#quick-start">README</a>. Running tasks needs
+Python 3.11+ and Horizon’s dependencies. The skill and checkout may live at
+different paths.</p>
+
+<h3 id="install-with-skills-cli">Install with Skills CLI</h3>
+
+<p>With Node.js 22.20 or later, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx skills add Thysrael/Horizon <span class="nt">--skill</span> horizon <span class="nt">-g</span>
+</code></pre></div></div>
+
+<p>The <a href="https://github.com/vercel-labs/skills">Skills CLI</a> discovers the skill in this
+repository and installs it for supported assistants such as Claude Code, Codex,
+OpenCode, and OpenClaw. Follow the agent-selection prompts when shown; <code class="language-plaintext highlighter-rouge">-g</code>
+installs at user level. To target a specific assistant, add its agent flag, for
+example <code class="language-plaintext highlighter-rouge">-a opencode</code>.</p>
+
+<h3 id="download-a-skill-package">Download a skill package</h3>
+
+<p><a href="https://thysrael.github.io/Horizon/downloads/horizon-skill.zip">Download horizon-skill.zip</a>.
+The archive contains the complete <code class="language-plaintext highlighter-rouge">horizon/</code> skill directory, including scripts,
+references, and the project license. Import it using your assistant’s local-package
+installer, or extract it and place the <code class="language-plaintext highlighter-rouge">horizon/</code> directory in the destination
+listed below.</p>
+
+<h3 id="copy-from-a-checkout">Copy from a checkout</h3>
+
+<p>Copy the <strong>entire</strong> <code class="language-plaintext highlighter-rouge">skills/horizon</code> directory into your agent’s skill directory:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Agent</th>
+      <th>Personal skill destination</th>
+      <th>Reference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Claude Code</td>
+      <td><code class="language-plaintext highlighter-rouge">~/.claude/skills/horizon/</code></td>
+      <td><a href="https://code.claude.com/docs/en/skills">Skills</a></td>
+    </tr>
+    <tr>
+      <td>Codex</td>
+      <td><code class="language-plaintext highlighter-rouge">~/.agents/skills/horizon/</code></td>
+      <td><a href="https://developers.openai.com/codex/skills">Skills</a></td>
+    </tr>
+    <tr>
+      <td>OpenCode V2</td>
+      <td><code class="language-plaintext highlighter-rouge">~/.config/opencode/skills/horizon/</code></td>
+      <td><a href="https://opencode.ai/v2/docs/skills/">Skills</a></td>
+    </tr>
+    <tr>
+      <td>OpenClaw</td>
+      <td><code class="language-plaintext highlighter-rouge">~/.openclaw/skills/horizon/</code></td>
+      <td><a href="https://docs.openclaw.ai/tools/skills">Skills</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For example, from the checkout, when the destination does not already exist:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.claude/skills
+<span class="nb">cp</span> <span class="nt">-R</span> skills/horizon ~/.claude/skills/horizon
+</code></pre></div></div>
+
+<p>Use your agent’s project-level installation or extra-directory configuration if
+preferred. For example, OpenCode V2 can load the checkout directly by adding its
+absolute <code class="language-plaintext highlighter-rouge">skills</code> directory to the existing configuration’s <code class="language-plaintext highlighter-rouge">skills</code> array.
+This avoids maintaining a second copy.</p>
+
+<h3 id="start-using-the-skill">Start using the skill</h3>
+
+<p>Follow the host’s refresh/reload behavior and verify that <code class="language-plaintext highlighter-rouge">horizon</code> appears in
+its available skills. For a first-time setup, say:</p>
+
+<blockquote>
+  <p>Use the Horizon skill to install and configure Horizon in my workspace, then
+help me set up a Chinese news radar for AI and open-source projects.</p>
+</blockquote>
+
+<p>The assistant checks for an existing installation, prepares missing prerequisites,
+and helps configure the model and sources. Importing the skill alone does not run
+an installer.</p>
+
+<p>For model setup, the assistant preserves existing Horizon settings and prefers
+reusing an available provider API key before asking for new credentials. The
+provider, model, API endpoint, and key environment variable must match. A key
+stored privately by the host agent needs to be supplied to Horizon’s process;
+an OAuth or subscription login is not a drop-in API key. New model settings are
+checked with a minimal JSON completion, since configuration validation alone
+does not verify connectivity. Scheduled jobs and containers also need access
+to the credentials in their own runtime environment.</p>
+
+<p>Eligible ChatGPT users can instead choose Horizon’s dedicated
+<a href="chatgpt.md">Sign in with ChatGPT</a> provider. The assistant can run the login and
+model-discovery commands while the user completes browser authorization.</p>
+
+<p>If Horizon is already installed, tell the assistant where the checkout is, or set
+<code class="language-plaintext highlighter-rouge">HORIZON_PATH</code>. MCP is optional. A sandboxed agent needs access to the checkout
+and its runtime.</p>
+
+<h2 id="try-it">Try it</h2>
+
+<ul>
+  <li>“Use Horizon to build a Chinese news radar for AI inference and open-source
+tools, with at most ten stories a day.”</li>
+  <li>“Read today’s Horizon digest and give me the original links.”</li>
+  <li>“Make a Profile for engineering write-ups that emphasizes solutions and
+tradeoffs.”</li>
+  <li>“Schedule Horizon at 08:00 Asia/Shanghai and send the digest to Feishu.”</li>
+  <li>“Add an optional content extractor following this repository’s conventions.”</li>
+</ul>
+
+<p>The helper can also be inspected directly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run python skills/horizon/scripts/horizon_ops.py run_pipeline <span class="nt">--describe</span>
+uv run python skills/horizon/scripts/horizon_ops.py validate_config <span class="nt">--params</span> <span class="s1">'{"check_env": false}'</span>
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">--params-file</code> for JSON parameters when shell quoting is inconvenient.
+<code class="language-plaintext highlighter-rouge">--describe</code> reads current service parameters without executing the operation.
+<code class="language-plaintext highlighter-rouge">ok: true</code> means the call returned; inspect native results for missing environment
+variables and partial failures. See the skill’s pipeline reference for details.</p>
+
+<h2 id="maintain-and-evaluate">Maintain and evaluate</h2>
+
+<p>Maintain one copy under <code class="language-plaintext highlighter-rouge">skills/horizon</code>. Configuration knowledge belongs in the
+existing subject docs, and pipeline behavior belongs in Horizon. The helper
+forwards native method parameters and results rather than maintaining another
+CLI schema or reimplementing the pipeline. Only its operation allowlist needs
+updating when intentionally exposing a new service method.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Deploy Docs</code> workflow packages the tracked <code class="language-plaintext highlighter-rouge">skills/horizon</code> directory and
+project license with <code class="language-plaintext highlighter-rouge">git archive</code>, publishing <code class="language-plaintext highlighter-rouge">downloads/horizon-skill.zip</code>
+alongside the Pages site. Changes to the skill trigger a deployment; the workflow
+can also be run manually. The download link becomes available once that
+deployment completes.</p>
+
+<p>Run the adapter’s offline regression tests after changing it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv <span class="nb">sync</span> <span class="nt">--extra</span> dev
+uv run pytest tests/test_horizon_skill.py <span class="nt">-q</span>
+</code></pre></div></div>
+
+<p>For behavioral evaluation, use <code class="language-plaintext highlighter-rouge">skills/horizon/evals/scenarios.json</code> in temporary
+checkouts with example configuration and fixture artifacts. Run a scenario with
+the skill and in a fresh session without it, using the same model, tools, and
+inputs. Record changed files, chosen operations, outputs, and whether each
+expected behavior was met. Include the non-trigger examples when checking the
+description. Fixture or mocked runs should cover routine evaluation; distinguish
+these from live provider and delivery checks.</p>
+
+<p>Adapted design principles: <a href="https://agentskills.io/specification">Agent Skills specification</a>,
+<a href="https://github.com/anthropics/skills/tree/main/skills/skill-creator">Anthropic skill-creator</a>,
+and <a href="https://github.com/openai/skills/tree/main/skills/.system/skill-creator">OpenAI skill-creator</a>.</p>
+
+
+      <footer class="site-footer">
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>

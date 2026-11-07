@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+gem list --installed --exact jekyll --version 4.3.4 >/dev/null ||
+  gem install --no-document jekyll --version 4.3.4
+gem list --installed --exact jekyll-theme-cayman --version 0.2.0 >/dev/null ||
+  gem install --no-document jekyll-theme-cayman --version 0.2.0
+gem list --installed --exact jekyll-feed --version 0.17.0 >/dev/null ||
+  gem install --no-document jekyll-feed --version 0.17.0

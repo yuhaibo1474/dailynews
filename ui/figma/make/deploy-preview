@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+jekyll build \
+  --source Horizon/docs \
+  --destination .figma/make/deploy-preview-site \
+  --baseurl ""
+[[ -d ".figma/make/deploy-preview-site" ]] || {
+  echo "Expected build output at .figma/make/deploy-preview-site" >&2
+  exit 1
+}
+figma make deploy-preview --build-dir ".figma/make/deploy-preview-site"

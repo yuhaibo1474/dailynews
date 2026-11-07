@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.9.1 -->
+<title>Sign in with ChatGPT | Horizon Daily</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Sign in with ChatGPT" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="AI-curated daily digest of tech and research news" />
+<meta name="twitter:description" property="og:description" content="AI-curated daily digest of tech and research news" />
+<link rel="canonical" href="http://0.0.0.0:3000/chatgpt.html" />
+<meta property="og:url" content="http://0.0.0.0:3000/chatgpt.html" />
+<meta property="og:site_name" content="Horizon Daily" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Sign in with ChatGPT" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"AI-curated daily digest of tech and research news","headline":"Sign in with ChatGPT","url":"http://0.0.0.0:3000/chatgpt.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌅</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌅</text></svg>">
+<link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌅</text></svg>">
+<link rel="alternate" type="application/rss+xml" title="Horizon Daily RSS (All)" href="/feed.xml">
+<link rel="alternate" type="application/atom+xml" title="Horizon Daily RSS (ZH)" href="/feed-zh.xml">
+<link rel="alternate" type="application/atom+xml" title="Horizon Daily RSS (EN)" href="/feed-en.xml">
+<link rel="stylesheet" href="/assets/css/horizon.css">
+<style>
+.rss-icon{opacity:.6;color:inherit;margin-left:12px;vertical-align:middle;text-decoration:none;transition:all .2s}
+.rss-icon:hover{opacity:1;color:#f26522}
+.rss-icon svg{width:0.9em;height:0.9em;display:inline-block}
+@media(prefers-color-scheme:dark){body{background:#1a1726!important;color:#e8e4f0!important}}
+</style>
+<script src="/assets/js/horizon.js" defer></script>
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">Sign in with ChatGPT</h1>
+      <h2 class="project-tagline">AI-curated daily digest of tech and research news</h2>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h1 id="use-your-chatgpt-plan">Use your ChatGPT plan</h1>
+
+<p>Horizon supports OpenAI’s official <strong>Sign in with ChatGPT / ChatGPT plan usage</strong>
+preview through the optional <code class="language-plaintext highlighter-rouge">openai-chatgpt</code> provider. Eligible Plus and Pro
+users can authorize Horizon to use their plan without setting <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code>.
+Availability depends on the selected account, workspace, model, and OpenAI’s
+current eligibility rules. The regular <code class="language-plaintext highlighter-rouge">openai</code> provider continues to use API billing.</p>
+
+<h2 id="connect-and-verify">Connect and verify</h2>
+
+<p>Update the project environment with <code class="language-plaintext highlighter-rouge">uv sync</code>, then run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run horizon-chatgpt login
+uv run horizon-chatgpt models
+uv run horizon-chatgpt check <span class="nt">--model</span> MODEL_SLUG
+</code></pre></div></div>
+
+<p>The login command opens the system browser. Authorize ChatGPT plan usage there;
+identity sign-in alone does not grant inference access. Use the exact model slug
+returned by <code class="language-plaintext highlighter-rouge">models</code>, rather than an API model name from another configuration.
+<code class="language-plaintext highlighter-rouge">check</code> performs one real, small JSON request using your plan and verifies that
+the response completed successfully.</p>
+
+<p>For interactive setup, choose <code class="language-plaintext highlighter-rouge">openai-chatgpt</code> in <code class="language-plaintext highlighter-rouge">uv run horizon-wizard</code>. It
+handles login and shows the account’s model catalog. For manual setup, replace
+the <code class="language-plaintext highlighter-rouge">ai</code> section in your existing configuration:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"ai"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-chatgpt"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODEL_SLUG"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"languages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"zh"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">api_key_env</code> is omitted or empty. <code class="language-plaintext highlighter-rouge">ai.chatgpt_account</code> can optionally name a
+saved client ID from <code class="language-plaintext highlighter-rouge">horizon-chatgpt accounts</code>; the wizard records it so the
+configuration stays tied to the selected registration. Without it, a new run
+uses the active account. Refresh the model selection after switching accounts.
+The CLI keeps that account across its AI stages; staged MCP runs retain the
+selected registration ID in run metadata so changing the active account does
+not redirect an existing run.</p>
+
+<h2 id="account-commands">Account commands</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run horizon-chatgpt status
+uv run horizon-chatgpt accounts
+uv run horizon-chatgpt login <span class="nt">--new-account</span>
+uv run horizon-chatgpt <span class="k">select </span>CLIENT_ID
+uv run horizon-chatgpt login <span class="nt">--account</span> CLIENT_ID
+uv run horizon-chatgpt <span class="nb">logout</span> <span class="nt">--account</span> CLIENT_ID
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">status</code>, <code class="language-plaintext highlighter-rouge">models</code>, and <code class="language-plaintext highlighter-rouge">check</code> also accept <code class="language-plaintext highlighter-rouge">--account CLIENT_ID</code>. If plan usage
+was not granted, explicitly request it with <code class="language-plaintext highlighter-rouge">login --enable-plan</code> (plus
+<code class="language-plaintext highlighter-rouge">--account</code> when needed). <code class="language-plaintext highlighter-rouge">login --no-browser</code> prints a URL to open in a browser
+on the same machine. The callback uses <code class="language-plaintext highlighter-rouge">127.0.0.1</code> on an available local port.</p>
+
+<p>Logout attempts to revoke the renewable session, clears local tokens, and keeps
+the registration and host ID for reconnecting. If remote revocation could not be
+confirmed, the command reports it. Access and limits can also be managed at
+<a href="https://chatgpt.com/settings/usage">ChatGPT Settings → Usage</a>.</p>
+
+<h2 id="storage-scheduled-runs-and-self-hosting">Storage, scheduled runs, and self-hosting</h2>
+
+<p>By default, state lives in <code class="language-plaintext highlighter-rouge">~/.config/horizon/chatgpt/</code>, or under
+<code class="language-plaintext highlighter-rouge">$XDG_CONFIG_HOME/horizon/chatgpt/</code>. <code class="language-plaintext highlighter-rouge">HORIZON_CHATGPT_AUTH_DIR</code> overrides this
+location. <code class="language-plaintext highlighter-rouge">credentials.json</code> contains account registrations and tokens;
+<code class="language-plaintext highlighter-rouge">host.json</code> contains this installation’s stable host ID. Keep both outside the
+repository. Credential writes are atomic and owner-only on Unix, and a file lock
+serializes refreshes across threads and processes.</p>
+
+<p>Access tokens expire after one hour. Horizon refreshes them near expiry and saves
+the replacement refresh token. Current refresh tokens last 30 days, with a new
+30-day lifetime after a successful refresh. Revoked or expired sessions require
+login again. Network failures retain saved credentials.</p>
+
+<p>For a persistent self-hosted VM or container, follow the
+<a href="https://developers.openai.com/siwc/token-sharing-open-source/self-hosted-vms">official VM procedure</a>:</p>
+
+<ol>
+  <li>Run <code class="language-plaintext highlighter-rouge">uv run horizon-chatgpt init</code> on the destination to create its own host ID.</li>
+  <li>Complete OAuth locally using Horizon and the intended account/workspace.</li>
+  <li>Transfer <code class="language-plaintext highlighter-rouge">credentials.json</code> to the destination over SSH or another protected
+channel. Preserve its owner-only access and the destination’s <code class="language-plaintext highlighter-rouge">host.json</code>.</li>
+  <li>Let the destination own subsequent token refreshes. Avoid using the copied
+session from two independent credential stores; reconnect locally if needed.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">check</code> from the actual scheduled account/container before scheduling a digest.</li>
+</ol>
+
+<p>Persist the auth directory across container restarts. The scheduled process must
+use the same auth directory and have write access for refreshes. A VM callback
+URL cannot be completed simply by opening it on a different computer.</p>
+
+<p>This integration targets user-operated local and self-hosted installations.
+OpenAI documents a separate access process for paid or remotely hosted apps.</p>
+
+<h2 id="preview-behavior-and-failures">Preview behavior and failures</h2>
+
+<p>Horizon uses <code class="language-plaintext highlighter-rouge">POST https://api.openai.com/v1/responses</code>, <code class="language-plaintext highlighter-rouge">store: false</code>, and
+<code class="language-plaintext highlighter-rouge">stream: true</code>. It maps the system prompt to <code class="language-plaintext highlighter-rouge">instructions</code>, waits for
+<code class="language-plaintext highlighter-rouge">response.completed</code>, and returns text to the existing classification, scoring,
+enrichment, and JSON-validation code. Partial, failed, and incomplete responses
+are never accepted as completed results.</p>
+
+<p>The current preview does not accept <code class="language-plaintext highlighter-rouge">temperature</code> or <code class="language-plaintext highlighter-rouge">max_output_tokens</code>.
+Consequently, Horizon’s <code class="language-plaintext highlighter-rouge">temperature</code> and <code class="language-plaintext highlighter-rouge">max_tokens</code> settings (including
+per-call overrides) are not sent by this provider. Custom API endpoints and
+<code class="language-plaintext highlighter-rouge">extra_body</code> are rejected. Model choices come from the connected account’s catalog.</p>
+
+<p>Plan usage is subject to shared and app-specific limits. On a usage-limit,
+permission, or account-eligibility failure, Horizon stops the AI stage instead of
+retrying every item or switching that request to API billing. In-flight batch
+tasks are cancelled; requests already accepted by the server may still consume
+usage. Temporary service failures retain bounded stage retries. These failure
+conditions can arrive after streaming has started.</p>
+
+<p>If configuring <code class="language-plaintext highlighter-rouge">provider_chain</code>, set <code class="language-plaintext highlighter-rouge">ai.provider</code> to <code class="language-plaintext highlighter-rouge">openai-chatgpt</code> to supply
+its selected model and account. Terminal plan/authentication errors stop the
+chain; ordinary transient failures follow the explicitly configured fallback chain.</p>
+
+<p>MCP/Skill <code class="language-plaintext highlighter-rouge">validate_config</code> reports local connection and permission state in
+<code class="language-plaintext highlighter-rouge">ai.auth</code>; it does not prove account eligibility, current allowance, or successful
+inference. Use <code class="language-plaintext highlighter-rouge">horizon-chatgpt check</code> for that verification.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://developers.openai.com/siwc/token-sharing-open-source">Official overview</a></li>
+  <li><a href="https://developers.openai.com/siwc/token-sharing-open-source/sign-in">Registration and sign-in</a></li>
+  <li><a href="https://developers.openai.com/siwc/token-sharing-open-source/profiles-and-sessions">Accounts and token renewal</a></li>
+  <li><a href="https://developers.openai.com/siwc/token-sharing-open-source/models-and-inference">Models and inference</a></li>
+  <li><a href="https://developers.openai.com/siwc/token-sharing-open-source/preview-limitations">Preview limitations</a></li>
+</ul>
+
+<p>The implementation follows the public protocol and uses the Python OpenAI SDK,
+PyJWT, and filelock. It does not incorporate the Node.js SIWC DevKit source.</p>
+
+
+      <footer class="site-footer">
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>
