@@ -47,8 +47,6 @@ data/mcp-runs/
 data/x_cookies_*.json
 data/wechat_session.json
 
-docs/_posts/*.md
-
 # Logs
 logs/*.log
 *.log
