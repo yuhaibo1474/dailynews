@@ -251,10 +251,15 @@ class AIConfig(BaseModel):
 class GitHubSourceConfig(BaseModel):
     """GitHub source configuration."""
 
-    type: str  # "user_events", "repo_releases", etc.
+    type: str  # "user_events", "repo_releases", "search", etc.
     username: Optional[str] = None
     owner: Optional[str] = None
     repo: Optional[str] = None
+    query: Optional[str] = None
+    sort: Optional[str] = None
+    order: Optional[str] = None
+    per_page: int = 20
+    created_within_days: Optional[int] = None
     enabled: bool = True
     category: Optional[str] = None
     profile: ProfileRoute = None

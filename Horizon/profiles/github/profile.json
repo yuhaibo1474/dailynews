@@ -1,0 +1,31 @@
+{
+  "id": "github",
+  "name": "GitHub Trending",
+  "display_names": {
+    "zh": "GitHub 热门"
+  },
+  "match": "match.md",
+  "analysis": "analysis.md",
+  "enrichment": {
+    "prompt": "enrichment.md",
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "section",
+        "tools": [],
+        "primary": true
+      },
+      {
+        "id": "background",
+        "type": "section",
+        "tools": []
+      },
+      {
+        "id": "impact",
+        "type": "section",
+        "tools": [],
+        "optional": true
+      }
+    ]
+  }
+}

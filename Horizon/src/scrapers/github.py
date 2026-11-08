@@ -1,7 +1,7 @@
 """GitHub scraper implementation."""
 
 import os
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional
 import httpx
 
@@ -22,8 +22,11 @@ class GitHubScraper(BaseScraper):
         self.token = os.getenv("GITHUB_TOKEN")
         self.base_url = "https://api.github.com"
 
-    def _get_headers(self) -> dict:
+    def _get_headers(self, with_token: bool = True) -> dict:
         """Get request headers with optional authentication.
+
+        Args:
+            with_token: Include the Authorization header when a token is set.
 
         Returns:
             dict: HTTP headers
@@ -32,9 +35,17 @@ class GitHubScraper(BaseScraper):
             "Accept": "application/vnd.github.v3+json",
             "User-Agent": "Horizon-Aggregator"
         }
-        if self.token:
+        if self.token and with_token:
             headers["Authorization"] = f"token {self.token}"
         return headers
+
+    async def _get_json(self, url: str, params: dict = None):
+        """GET JSON, falling back to unauthenticated when the token is rejected (401)."""
+        resp = await self.client.get(url, headers=self._get_headers(), params=params, follow_redirects=True)
+        if resp.status_code == 401 and self.token:
+            resp = await self.client.get(url, headers=self._get_headers(with_token=False), params=params, follow_redirects=True)
+        resp.raise_for_status()
+        return resp.json()
 
     async def fetch(self, since: datetime) -> FetchResult:
         """Fetch GitHub content items.
@@ -56,6 +67,8 @@ class GitHubScraper(BaseScraper):
                 await result.collect(source.username, self._fetch_user_events(source, since))
             elif source.type == "repo_releases" and source.owner and source.repo:
                 await result.collect(f"{source.owner}/{source.repo}", self._fetch_repo_releases(source, since))
+            elif source.type == "search" and source.query:
+                await result.collect("search:" + source.query, self._fetch_search(source, since))
             else:
                 result.fail(source.username or source.repo or source.type, ValueError("Invalid GitHub source configuration"))
 
@@ -78,9 +91,7 @@ class GitHubScraper(BaseScraper):
         url = f"{self.base_url}/users/{source.username}/events/public"
         items = []
 
-        response = await self.client.get(url, headers=self._get_headers(), follow_redirects=True)
-        response.raise_for_status()
-        events = response.json()
+        events = await self._get_json(url)
 
         for event in events:
             created_at = datetime.fromisoformat(
@@ -173,9 +184,7 @@ class GitHubScraper(BaseScraper):
         url = f"{self.base_url}/repos/{owner}/{repo}/releases"
         items = []
 
-        response = await self.client.get(url, headers=self._get_headers(), follow_redirects=True)
-        response.raise_for_status()
-        releases = response.json()
+        releases = await self._get_json(url)
 
         for release in releases:
             # Authenticated listings can include drafts without a publication date.
@@ -204,3 +213,57 @@ class GitHubScraper(BaseScraper):
             ))
 
         return items
+
+    async def _fetch_search(
+        self,
+        source: GitHubSourceConfig,
+        since: datetime,
+    ) -> List[ContentItem]:
+        """Fetch repositories matching a GitHub search query (e.g. popular/trending)."""
+        query = (source.query or "").strip()
+        if source.created_within_days:
+            cutoff = datetime.now(timezone.utc) - timedelta(days=source.created_within_days)
+            query = f"{query} created:>{cutoff.strftime('%Y-%m-%d')}".strip()
+
+        params = {"q": query, "per_page": source.per_page or 20}
+        if source.sort:
+            params["sort"] = source.sort
+        if source.order:
+            params["order"] = source.order
+
+        url = f"{self.base_url}/search/repositories"
+        repos = (await self._get_json(url, params)).get("items") or []
+
+        items = []
+        for repo in repos:
+            item = self._parse_repo(repo, source)
+            if item:
+                items.append(item)
+        return items
+
+    def _parse_repo(self, repo: dict, source: GitHubSourceConfig) -> Optional[ContentItem]:
+        """Parse a GitHub search repository result into a ContentItem."""
+        full_name = repo.get("full_name")
+        if not full_name:
+            return None
+        stars = repo.get("stargazers_count") or 0
+        language = repo.get("language") or ""
+        description = repo.get("description") or ""
+        pushed_at = repo.get("pushed_at") or repo.get("updated_at") or repo.get("created_at")
+        published_at = datetime.fromisoformat(pushed_at.replace("Z", "+00:00")) if pushed_at else datetime.now(timezone.utc)
+        return ContentItem(
+            id=self._generate_id("github", "search", str(repo.get("id"))),
+            source_type=SourceType.GITHUB,
+            title=f"{full_name} · ⭐{stars}",
+            url=repo.get("html_url") or f"https://github.com/{full_name}",
+            content=description,
+            author=(repo.get("owner") or {}).get("login", ""),
+            published_at=published_at,
+            profile=source.profile,
+            metadata={
+                "repo": full_name,
+                "stars": stars,
+                "language": language,
+                "category": source.category,
+            },
+        )
