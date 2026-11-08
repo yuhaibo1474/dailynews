@@ -6,8 +6,6 @@
   var h2s = Array.prototype.slice.call(content.querySelectorAll('h2'));
   if (h2s.length === 0) return;
 
-  var isMobile = window.matchMedia('(max-width: 640px)').matches;
-
   // 1) 把每个 <h2> 及其后续内容包成一个 panel（直到下一个 <h2>）。
   h2s.forEach(function (h2, i) {
     var panel = document.createElement('section');
@@ -47,38 +45,58 @@
     tabs.push({ btn: btn, panel: panel });
   });
 
-  function setActive(name) {
+  // 4) 每个板块内的新闻条目包裹成卡片（1×n 单列列表）。
+  panels.forEach(function (panel) { cardify(panel); });
+
+  function cardify(panel) {
+    var cards = [];
+    var current = [];
+    Array.prototype.slice.call(panel.children).forEach(function (child) {
+      // 板块标题 <h2> 跳过，不放进卡片。
+      if (child.tagName === 'H2') return;
+      // 条目锚点 <p><a id="item-..."></a></p>：条目起点，锚点本身是空的，移除。
+      if (child.tagName === 'P' && child.querySelector('a[id^="item-"]')) {
+        if (current.length) cards.push(current);
+        current = [];
+        child.remove();
+        return;
+      }
+      // 分隔线 <hr>：条目终点，移除。
+      if (child.tagName === 'HR') {
+        if (current.length) cards.push(current);
+        current = [];
+        child.remove();
+        return;
+      }
+      current.push(child);
+    });
+    if (current.length) cards.push(current);
+
+    cards.forEach(function (group) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      var first = group[0];
+      first.parentNode.insertBefore(card, first);
+      group.forEach(function (n) { card.appendChild(n); });
+    });
+  }
+
+  // 5) 顶部导航：点击切换到对应板块。
+  function activate(name) {
+    panels.forEach(function (p) {
+      p.style.display = (p.getAttribute('data-panel') === name) ? 'block' : 'none';
+    });
     tabs.forEach(function (t) {
       t.btn.classList.toggle('active', t.btn.getAttribute('data-panel') === name);
     });
   }
 
-  if (isMobile) {
-    // 移动端：所有板块纵向堆叠，Tab 只做锚点跳转。
-    panels.forEach(function (p) { p.style.display = 'block'; });
-    tabs.forEach(function (t) {
-      t.btn.addEventListener('click', function () {
-        t.panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setActive(t.btn.getAttribute('data-panel'));
-      });
+  tabs.forEach(function (t) {
+    t.btn.addEventListener('click', function () {
+      activate(t.btn.getAttribute('data-panel'));
     });
-  } else {
-    // 桌面端：Tab 切换显隐。
-    tabs.forEach(function (t) {
-      t.btn.addEventListener('click', function () {
-        var name = t.btn.getAttribute('data-panel');
-        panels.forEach(function (p) {
-          p.style.display = (p.getAttribute('data-panel') === name) ? 'block' : 'none';
-        });
-        setActive(name);
-      });
-    });
-    // 默认显示第一个板块。
-    if (tabs.length) {
-      panels.forEach(function (p) {
-        p.style.display = (p === tabs[0].panel) ? 'block' : 'none';
-      });
-      setActive(tabs[0].btn.getAttribute('data-panel'));
-    }
-  }
+  });
+
+  // 默认显示第一个板块。
+  if (tabs.length) activate(tabs[0].btn.getAttribute('data-panel'));
 })();
