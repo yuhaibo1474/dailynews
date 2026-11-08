@@ -5,200 +5,135 @@ date: 2026-11-08
 lang: zh
 ---
 
-> 从 42 条内容中筛选出 28 条重要资讯。
+> 从 35 条内容中筛选出 23 条重要资讯。
 
 ---
 
 **AI 资讯**
-1. [Anthropic 拟感恩节前 IPO，募资 800–1000 亿美元](#item-tech-news-1) ⭐️ 8.0/10
-2. [苹果披露人形机器人系统 HALO，采用两个千问模型](#item-tech-news-2) ⭐️ 8.0/10
-3. [GitHub 新 Git 存储架构 Rubicon 支持每秒 7200 次推送](#item-tech-news-3) ⭐️ 8.0/10
-4. [Claude Code“不再询问”设置致密码泄露至 1,122 个公开 GitHub 文件](#item-tech-news-4) ⭐️ 7.0/10
+1. [Claude Code 权限配置泄露密钥：1,122 个公开 GitHub 文件](#item-tech-news-1) ⭐️ 7.0/10
+2. [Anthropic 拟感恩节前 IPO，募资 800–1000 亿美元](#item-tech-news-2) ⭐️ 7.0/10
+
+**科技博客**
+1. [LLM 代理为何误用符号方案设计 AI 系统](#item-tech-blog-1) ⭐️ 6.0/10
 
 **财经**
-1. [伯克希尔三季度回购翻倍，利润下滑](#item-finance-news-1) ⭐️ 7.0/10
-2. [软银与 ABB 拟分拆中国机器人业务以挽救 54 亿美元收购](#item-finance-news-2) ⭐️ 7.0/10
+1. [伯克希尔第三季度回购翻倍，利润下滑](#item-finance-news-1) ⭐️ 7.0/10
 
 **政策**
-1. [国务院发布修改和废止部分行政法规的决定](#item-policy-1) ⭐️ 7.0/10
+1. [国务院决定修改和废止部分行政法规](#item-policy-1) ⭐️ 7.0/10
 2. [国务院批复辽宁等 9 省区国家级自然保护区与风景名胜区整合优化方案](#item-policy-2) ⭐️ 6.0/10
 
 **GitHub 热门**
-1. [DeepSeek 官方推理框架 DeepInfer 获超 2.5 万星](#item-github-1) ⭐️ 9.0/10
-2. [DeepSeek AI 发布自主智能体系统原型 dsh-superagent-prototype](#item-github-2) ⭐️ 8.0/10
-3. [dsh-Go：手机运行 DeepSeek Harness 并遥控电脑](#item-github-3) ⭐️ 8.0/10
-4. [storytold/craft-anything：理解并复刻任意软件](#item-github-4) ⭐️ 7.0/10
-5. [seedds/nxnative：将 Switch 游戏打包为 iOS 与 Mac 应用](#item-github-5) ⭐️ 7.0/10
-6. [heydamir/unslop：将 AI 生成界面打磨成设计感 UI 的 Claude 技能](#item-github-6) ⭐️ 7.0/10
-7. [aerial-tv：为国产电视打造的无广告 tvOS 风格桌面](#item-github-7) ⭐️ 7.0/10
-8. [openidea：用 Rust 重建的 IntelliJ 风格 IDE](#item-github-8) ⭐️ 7.0/10
-9. [Mika：Android 端侧 AI 智能体获 7679 星](#item-github-9) ⭐️ 7.0/10
-10. [MacNativeGames：在 Apple 芯片上原生运行《王国之泪》](#item-github-10) ⭐️ 7.0/10
+1. [DeepSeek 官方推理框架 DeepInfer 获约 2.56 万星](#item-github-1) ⭐️ 8.0/10
+2. [deepseek-ai 发布 dsh-superagent-prototype，获约 2.1 万星](#item-github-2) ⭐️ 8.0/10
+3. [seedds/nxnative：将 Switch 游戏转为 iOS 原生 IPA](#item-github-3) ⭐️ 8.0/10
+4. [openidea：用 Rust 重建 IntelliJ 风格 IDE](#item-github-4) ⭐️ 8.0/10
+5. [Gathin23/cleanyourtv：通过 Wi-Fi 精简 Android TV 并改造主屏](#item-github-5) ⭐️ 7.0/10
+6. [dsh-Go：把 DeepSeek Harness 装进口袋](#item-github-6) ⭐️ 7.0/10
+7. [heydamir/unslop：将 AI 生成的界面转化为设计感 UI 的 Claude 技能](#item-github-7) ⭐️ 7.0/10
+8. [aerial-tv：为国产电视打造无广告 tvOS 风格桌面](#item-github-8) ⭐️ 7.0/10
+9. [Mika：Android 端侧 AI 智能体获 7683 星](#item-github-9) ⭐️ 7.0/10
+10. [MacNativeGames：在 Apple 芯片上原生运行塞尔达传说](#item-github-10) ⭐️ 7.0/10
 11. [android-ad-cleaner：免 root 关闭国产安卓系统广告](#item-github-11) ⭐️ 7.0/10
 12. [learnharness：用于学习难题的智能体框架](#item-github-12) ⭐️ 7.0/10
-13. [Lichii：实验性 Nintendo Switch 2 模拟器获 6252 星](#item-github-13) ⭐️ 7.0/10
-14. [Jakeschincariol/day-trader-skill：11 个 Claude 日内交易技能](#item-github-14) ⭐️ 7.0/10
-15. [Gathin23/cleanyourtv：通过 Wi-Fi 精简 Android TV 并改造主屏](#item-github-15) ⭐️ 6.0/10
-16. [Zagitta/gpu-unlock：解锁 GeForce 张量吞吐](#item-github-16) ⭐️ 6.0/10
-17. [HeyPuter/everything：重建并开源世界软件的宏大项目](#item-github-17) ⭐️ 6.0/10
-18. [unclebob/ub-mode：为自定义 ub 语言打造的 Emacs 主模式](#item-github-18) ⭐️ 6.0/10
-19. [cn-math-taxonomy：中文 K-12 知识图谱与题库](#item-github-19) ⭐️ 6.0/10
-20. [anhao/ai-pose-gallery-zh：零依赖中文 AI 姿势图库](#item-github-20) ⭐️ 6.0/10
+13. [Lichii：实验性 Nintendo Switch 2 模拟器获约 6300 星](#item-github-13) ⭐️ 7.0/10
+14. [storytold/craft-anything：理解任意软件并打造自己的版本](#item-github-14) ⭐️ 6.0/10
+15. [Zagitta/gpu-unlock：解锁 GeForce 20/30/40 系列张量吞吐](#item-github-15) ⭐️ 6.0/10
+16. [unclebob/ub-mode：拥有约 7.3k 星的 Emacs 模式](#item-github-16) ⭐️ 6.0/10
+17. [cn-math-taxonomy：对齐课标的中国 K-12 知识图谱数据集](#item-github-17) ⭐️ 6.0/10
 
 ---
 
 ## AI 资讯
 
 <a id="item-tech-news-1"></a>
-### [Anthropic 拟感恩节前 IPO，募资 800–1000 亿美元](https://aihot.news/items/okhx4jjwucd647299qwzsl6ua) ⭐️ 8.0/10
+### [Claude Code 权限配置泄露密钥：1,122 个公开 GitHub 文件](https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again) ⭐️ 7.0/10
 
-据《金融时报》援引投资者消息，Anthropic 计划在感恩节前启动 IPO，拟募资 800–1000 亿美元，估值区间为 1.25–1.75 万亿美元。这一估值低于部分最乐观投资者期望的 2 万亿美元，但高于公司当前 9650 亿美元的估值。上述数字来自二手报道，尚未获得 Anthropic 官方确认，募资规模与估值区间均可能变化。
+安全公司 Apiiro 的博客文章称，在公开 GitHub 仓库中扫描到 1,122 个文件包含密码和密钥，这些内容来自 Claude Code 的“Don&\#x27;t Ask Again”权限条目被提交到代码库。Claude Code 团队的 Boris 在 Hacker News 回应称，\`.claude/settings.local.json\` 本应只保留在本地，Claude 创建该文件时会自动将其加入 gitignore，此次涉及的文件是用户手动创建并提交的；他同时表示团队此前未做密钥清理，正在研究预防措施。该发现依赖两个条件同时成立：用户把本地设置文件提交到公开仓库，且被批准的命令中直接含有密钥，因此标题的因果表述被社区认为有所夸大。
 
-rss · AIHOT 精选 · 11月7日 17:37
+hackernews · shmulc · 11月7日 20:45 · [社区讨论](https://news.ycombinator.com/item?id=50407882)
 
-**「背景」** 据《金融时报》报道，Anthropic 此次 IPO 的估值区间为 1.25–1.75 万亿美元，低于部分投资者此前约 2 万亿美元的预期，但高于其当前 9650 亿美元的估值。此前有报道称 Anthropic 已提交上市申请，并瞄准约 1.5 万亿美元的估值目标。
+**「背景」** Claude Code 将权限配置保存在项目内的 \`.claude/settings.local.json\` 中，该文件按设计仅供本地使用，Claude 创建它时会自动加入 gitignore。此次事件的前提是用户手动创建该文件、在其中批准了包含密钥或密码的命令，并将其提交到公开仓库。Claude Code 团队成员在讨论中表示，该产品此前并未内置密钥擦除功能，目前正在研究如何防止此类泄露。
 
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://www.ft.com/content/2fbd60ee-060a-4957-b9c5-3b5a0ce88e1a?syn-25a6b1a6=1">So, about that Anthropic IPO</a></li>
-<li><a href="https://www.fool.com/investing/2026/09/18/dario-amodei-danger-ai-anthropic-trillion-ipo/">Will fears of AI crush Anthropic &#x27;s IPO valuation prospects?</a></li>
-<li><a href="https://www.linkedin.com/pulse/anthropic-ipo-2026-explained-from-965-billion-possible-2-pvgkc">Anthropic IPO 2026 Explained, From $965 Billion to a Possible...</a></li>
+**「影响与应对」** 使用 Claude Code 的开发者应确认 \`.claude/settings.local.json\` 未被纳入版本控制，并检查已提交的权限配置中是否含有明文密钥；若已泄露，需立即轮换相关凭据。该事件也说明，代理工具的本地权限记录可能成为密钥泄露的新载体，而不仅限于源码或环境变量文件。
 
-</ul>
-</details>
+**「社区讨论」** 评论者 Aurornis 指出标题有误导性：单独点击“Don&\#x27;t Ask Again”不会泄露密码，泄露需要用户提交本地设置且命令中直接包含密钥。另一位评论者 tsergiu 表示对 AI 代理的访问权限高度警惕，其做法是为每个任务使用隔离网络上的临时虚拟机并配合 \`--dangerously-skip-permissions\`，再通过 API 代理限制对外部服务的权限。
 
-**标签**: `#AI industry`, `#Anthropic`, `#IPO`, `#business`, `#funding`
+**标签**: `#security`, `#AI coding agents`, `#secrets management`, `#Claude Code`, `#open source`
 
 ---
 
 <a id="item-tech-news-2"></a>
-### [苹果披露人形机器人系统 HALO，采用两个千问模型](https://weibo.com/1642634100/RqjjGllvw) ⭐️ 8.0/10
+### [Anthropic 拟感恩节前 IPO，募资 800–1000 亿美元](https://aihot.news/items/okhx4jjwucd647299qwzsl6ua) ⭐️ 7.0/10
 
-苹果研究团队于 11 月 4 日在预印本平台 arXiv 提交论文，披露人形机器人自主控制系统 HALO，并在宇树 G1 上完成验证，将仿真环境中学到的动作迁移到陌生真实房间执行。HALO 分为三层：上层使用千问 Qwen3.6-35B-A3B 负责任务编排，中层使用 Qwen3.5-2B 生成动作，底层是经强化学习训练的动作跟踪器。研究团队已公开数据生成、模型训练与部署代码。上述信息来自预印本论文及二手转述，具体性能指标尚无法在此独立核实。
+据《金融时报》援引投资者消息，Anthropic 计划在感恩节前启动 IPO，拟募资 800–1000 亿美元，估值区间为 1.25–1.75 万亿美元。这一估值低于部分最乐观投资者期望的 2 万亿美元，但高于公司当前 9650 亿美元的估值。上述数字来自二手报道，尚未获得 Anthropic 官方确认，募资规模与时间表仍可能变化。
 
-telegram · zaihuapd · 11月7日 13:35
+rss · AIHOT 精选 · 11月7日 17:37
 
-**「背景」** HALO 是苹果研究团队在 arXiv 论文《Perceptive Humanoid Motion from Simulation》中提出的系统，其全称为 Humanoid Autonomy, Learned in simulation, running Onboard，即通过在仿真中生成第一视角的视觉—语言—动作数据来训练策略，并让策略完全在实体机器人上本地运行。相关代码已发布在 apple-aiml-research/ml-halo 仓库中。
-
-**「影响」** 对机器人研究者而言，公开的数据生成、训练与部署代码降低了复现分层控制方案的门槛，且方案基于宇树 G1 这一可采购的硬件平台；但论文仍属预印本，采用前需自行验证其在其他机型与场景下的迁移效果。
+**「背景」** 据 CNBC 报道，Anthropic 投资者此前数月讨论的目标估值曾高达 2 万亿美元，如今已下调至 1 万亿至 1.5 万亿美元区间。此次《金融时报》披露的 1.25 万至 1.75 万亿美元估值区间，正是在这一预期回落背景下提出的，且仍高于其当前 9650 亿美元的估值。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://arxiv.org/html/2611.06908">Perceptive Humanoid Motion from Simulation - arXiv.org</a></li>
-<li><a href="https://github.com/apple-aiml-research/ml-halo">GitHub - apple-aiml-research/ml-halo: HALO: Perceptive ...</a></li>
+<li><a href="https://www.cnbc.com/2026/11/07/anthropic-ipo-ai-data-center-backlash.html">Anthropic IPO hits AI backlash after midterms show rebuke data centers</a></li>
 
 </ul>
 </details>
 
-**标签**: `#robotics`, `#humanoid-robots`, `#sim-to-real`, `#Qwen`, `#open-source-research`
+**标签**: `#AI industry`, `#Anthropic`, `#IPO`, `#funding`, `#business news`
 
 ---
 
-<a id="item-tech-news-3"></a>
-### [GitHub 新 Git 存储架构 Rubicon 支持每秒 7200 次推送](https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/) ⭐️ 8.0/10
+## 科技博客
 
-GitHub 公布了代号 Rubicon 的新 Git 存储架构，目标是支持大量 AI 智能体并发操作同一个仓库。该架构将 Git 对象存入 Azure Blob Storage，引用状态由 Ref-CAS 管理，并由虚拟副本处理读写、后台节点压缩数据包。GitHub 称内部测试中支持 5000 个智能体同时协作、每秒处理 7200 次推送，读取延迟保持在较低水平；目前该架构处于有限私有预览阶段，将逐步扩大推广范围。
+<a id="item-tech-blog-1"></a>
+### [LLM 代理为何误用符号方案设计 AI 系统](https://seangoedecke.com/llms-are-terrible-at-designing-ai-systems/) ⭐️ 6.0/10
 
-telegram · zaihuapd · 11月7日 14:12
+rss · Sean Goedecke · 11月8日 00:00
 
-**「背景」** Git 传统上把仓库的提交、树和文件内容打包成 pack 文件，并连同引用状态一起存放在同一套存储中，仓库规模变大或并发写入增多时，这种耦合会成为瓶颈。GitHub 的 Rubicon 架构把这两部分拆开：pack 数据放入 Azure Blob Storage，引用和 pack 清单交给可复制的 Ref-CAS 日志管理，读写由一次性虚拟副本处理，后台节点负责数据包压缩。
+**「背景」** 作者观察到，LLM 代理在编写普通程序时表现尚可，但面对“AI 形态”的问题时，常会设计出错误的系统。例如，一个用于检测记忆矛盾的 vibe-code 工具，本可直接调用 LLM 扫描矛盾，代理却构建了复杂的符号逻辑系统，试图用求解器机械比较自然语言命题。作者在 Autodeck 项目中也遇到代理用正则或关键词分类卡片，而非再调用一次 LLM。
 
-**「影响与限制」** 对需要在单一仓库上运行大量并发自动化任务的团队而言，这一架构若按 GitHub 所述指标推广，可缓解高并发推送下的吞吐瓶颈。但相关数字来自 GitHub 内部测试，且服务目前仅限私有预览，外部用户尚无法验证其在实际仓库上的表现。
+**「方案」** 作者提出三种解释。第一，训练代码大多来自 LLM 出现之前，但 LLM 在其他领域能选用现代技术，因此这不足以解释。第二，RLVR 环境可能缺乏调用 LLM 的凭证和 API 访问，导致强化学习过程不鼓励写调用 LLM 的代码；作者明确表示此说法未经证实。第三，也是作者最倾向的解释：当前 AI 代理的软件设计能力本身不佳，选错工具是普通的设计错误，类似它们构建注定失败的共识算法或在事件驱动系统中引入同步检查。作者强调，人类程序员若实现复杂符号求解器，会知道它不可行；只有 LLM 能同时“足够聪明又足够愚蠢”地犯此错误。
 
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/">Inside GitHub &#x27;s new Git storage architecture - The GitHub Blog</a></li>
-<li><a href="https://dzen.ru/a/au6qec3gh2vpaVUH">GitHub описала Rubicon , новое хранилище Git для... | Дзен</a></li>
+**「启示」** 作者的核心论点是：用好 LLM 的关键在于提取其擅长领域的价值，并避免在其不擅长处浪费时间；由于 LLM 的强弱表现看似随机，能否提前预测其表现，决定了你是获得巨大价值，还是浪费大量时间和 token 走上无望的路径。
 
-</ul>
-</details>
-
-**标签**: `#git`, `#github`, `#storage-architecture`, `#ai-agents`, `#distributed-systems`
-
----
-
-<a id="item-tech-news-4"></a>
-### [Claude Code“不再询问”设置致密码泄露至 1,122 个公开 GitHub 文件](https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again) ⭐️ 7.0/10
-
-一篇博客文章报告称，Claude Code 的“Don&\#x27;t Ask Again”（不再询问）权限设置导致密码出现在 1,122 个公开 GitHub 文件中。Claude Code 团队成员 bcherny 在讨论中回应称，该工具历来不做密钥清理，但正在研究预防措施；他指出\`.claude/settings.local.json\`本应仅保留在本地，Claude 创建该文件时会自动将其加入 gitignore，因此涉事文件是用户手动创建并提交到版本库的。该发现来自博客作者的统计，并非独立验证的结果，具体泄露范围和影响尚未由第三方确认。
-
-hackernews · shmulc · 11月7日 20:45 · [社区讨论](https://news.ycombinator.com/item?id=50407882)
-
-**「背景」** Claude Code 的权限设置分为多个层级：当用户在权限提示中选择“Yes, and don&\#x27;t ask again”这类长期授权时，工具会把该授权写入项目内的 \`.claude/settings.local.json\`，而团队共享配置则放在 \`.claude/settings.json\` 中。官方文档说明，本地设置文件面向单个开发者，应加入 \`.gitignore\`，不应提交到版本控制。此次事件的核心正是这类本应留在本地的授权记录被手动创建并提交到了公开仓库。
-
-**「实际影响」** 使用 Claude Code 并手动创建、提交\`.claude/settings.local.json\`的开发者可能已将权限配置中的凭据暴露在公开仓库中，应检查该文件是否被纳入版本控制并从历史记录中清除。由于 Claude Code 目前不提供密钥清理功能，团队需依赖外部扫描工具或提交前检查来防止类似泄露。
-
-**「社区讨论」** 有评论者表示对 AI 代理的访问权限高度警惕，提出为每个任务使用隔离网络上的临时虚拟机并配合 API 代理限制外部服务权限；另一条评论建议将开发放在私有仓库，通过白名单脚本只将发布所需文件挑选到公开仓库，并用脚本扫描硬编码密钥。也有评论批评该博客文章约 80%内容在重复，提醒发布 AI 生成内容前应先编辑。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://code.claude.com/docs/en/settings">Settings files and precedence - Claude Code Docs</a></li>
-<li><a href="https://github.com/dwillitzer/claude-settings">Claude Code Settings - GitHub</a></li>
-
-</ul>
-</details>
-
-**标签**: `#security`, `#AI coding agents`, `#secret management`, `#GitHub`, `#developer tooling`
+**标签**: `#LLM agents`, `#software design`, `#AI system architecture`, `#reinforcement learning`, `#anecdotal evidence`
 
 ---
 
 ## 财经
 
 <a id="item-finance-news-1"></a>
-### [伯克希尔三季度回购翻倍，利润下滑](https://www.cnbc.com/2026/11/07/berkshire-hathaway-q3-2026-earnings-buybacks.html) ⭐️ 7.0/10
+### [伯克希尔第三季度回购翻倍，利润下滑](https://www.cnbc.com/2026/11/07/berkshire-hathaway-q3-2026-earnings-buybacks.html) ⭐️ 7.0/10
 
-伯克希尔·哈撒韦在 2026 年第三季度回购了 96 亿美元自家股票，超过第二季度 45 亿美元的两倍；同期营业利润同比下降 5.8%至 127.05 亿美元，整体利润下降 28%至 221.12 亿美元。
+伯克希尔·哈撒韦在 2026 年第三季度将股票回购规模扩大至 96 亿美元，超过第二季度 45 亿美元的两倍；同期营业利润为 127.05 亿美元，同比下降 5.8%，整体利润下降 28%至 221.12 亿美元。
 
 rss · CNBC Finance · 11月7日 15:23
 
-**「背景」** 营业利润只统计伯克希尔全资经营的业务，不含其股票投资组合的账面收益，因此更能反映保险、铁路等实体业务的经营状况；本季度保险承保利润同比下滑 43%，是营业利润下降的主要原因。
+**「背景」** 营业利润只统计伯克希尔全资经营的业务，不含其股票投资组合的市值变动；本季度保险承保利润同比下滑 43%，是营业利润下降的主要原因，而铁路、能源和制造业务利润均实现增长。
 
-**「影响」** 回购加码使伯克希尔 2026 年累计回购规模达到约 144 亿美元，同时其现金及等价物升至 3774.35 亿美元，显示公司在利润承压时仍倾向把资金用于回购而非大额收购。
+**「影响」** 回购加速使伯克希尔 2026 年累计回购约 144 亿美元，同时其现金及等价物（不含铁路和公用事业现金及短期国债应付款）为 3523 亿美元，较上季度减少 1.9%，这反映公司在利润承压时仍选择向股东返还资金。
 
-**标签**: `#Berkshire Hathaway`, `#share buybacks`, `#earnings`, `#insurance`, `#corporate cash`
-
----
-
-<a id="item-finance-news-2"></a>
-### [软银与 ABB 拟分拆中国机器人业务以挽救 54 亿美元收购](https://www.bloomberg.com/news/articles/2026-11-07/softbank-abb-weigh-china-carve-out-to-salvage-robotics-deal) ⭐️ 7.0/10
-
-据彭博社报道，软银与 ABB 正考虑将 ABB 机器人业务的中国部分分拆为一家股权结构不同的独立实体，以挽救已被中国监管机构叫停的 54 亿美元收购；知情人士称该中国业务估值约为 20 亿至 30 亿美元，且这一方案可能失败。
-
-telegram · zaihuapd · 11月7日 11:24
-
-**「背景」** 中国外商投资安全审查工作机制办公室本周四叫停了软银以 54 亿美元收购 ABB 机器人业务的交易，ABB 已确认收到软银的相关通知。中国是 ABB 最大的机器人市场，其面向中国客户的机器大多在中国本地生产。
-
-**「影响」** 若分拆方案推进，ABB 中国机器人业务将转为由软银主导的独立实体，其股权安排和监管审批结果将直接影响该业务的归属与在华经营。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://www.nytimes.com/2026/11/05/business/softbank-robotics-china-block.html">China Blocks SoftBank ’s $ 5 . 4 Billion Robotics Takeover, Impeding...</a></li>
-<li><a href="https://www.abb.com/global/en/news/140154/update-on-divestment-of-abb-robotics">Update on divestment of ABB Robotics</a></li>
-
-</ul>
-</details>
-
-**标签**: `#M&amp;A`, `#robotics`, `#China regulation`, `#SoftBank`, `#ABB`
+**标签**: `#Berkshire Hathaway`, `#earnings`, `#share buybacks`, `#insurance`, `#corporate finance`
 
 ---
 
 ## 政策
 
 <a id="item-policy-1"></a>
-### [国务院发布修改和废止部分行政法规的决定](https://www.gov.cn/zhengce/content/202611/content_7085098.htm) ⭐️ 7.0/10
+### [国务院决定修改和废止部分行政法规](https://www.gov.cn/zhengce/content/202611/content_7085098.htm) ⭐️ 7.0/10
 
-国务院发布了《国务院关于修改和废止部分行政法规的决定》，对中国现行部分行政法规作出修改和废止处理。该决定由中国政府网于 2026 年 11 月 4 日发布，属于国务院层面的正式行政法规调整。所提供文本未列明具体涉及哪些法规、修改条款内容及施行时间，因此受影响的具体行业和合规要求尚无法确认。
+中国政府网 2026 年 11 月 4 日发布《国务院关于修改和废止部分行政法规的决定》，由国务院作出，属于对部分行政法规进行修改和废止的正式决定。现有公开文本仅包含标题，未列明涉及的具体法规名称、修改条款内容、废止范围及施行时间，因此受影响领域和合规要求尚无法确定。
 
 rss · 中国政府网·政策文件 · 11月4日 16:00
 
-**「背景」** 国务院此次以“修改和废止部分行政法规的决定”形式推进法规清理，属于对现行行政法规体系进行集中调整的常规立法方式。所给材料未披露具体涉及哪些法规、修改或废止的具体条款及生效时间，因此无法确认其与此前某项具体政策或事件的直接关联。
+**「背景」** 国务院此前已多次以“修改和废止部分行政法规的决定”形式集中清理行政法规，例如《人民日报》刊载的相关决定文本即附有“国务院决定修改的行政法规”和“国务院决定废止的行政法规”两份清单（tool-1-2）。此类打包修法通常用于衔接上位法调整、取消或下放行政审批事项以及清理不适应现行体制的条款。本次决定延续这一做法，但现有材料未披露具体涉及哪些法规及修改内容。
 
-**「对企业的合规影响」** 该决定对部分行政法规条款作出修改，并废止 3 部行政法规，自 2026 年 8 月 15 日起施行。受这些法规约束的企业和个人需按修改后的条款调整合规安排，并停止适用已废止的 3 部法规。由于所给材料未列出具体法规名称和修改条款，具体受影响行业和合规义务尚无法确认。
+**「对受影响主体的影响」** 该决定对部分行政法规条款作出修改，并废止 3 部行政法规，自 2026 年 8 月 15 日起施行。受这些法规约束的企业和机构需按新规调整合规安排；具体涉及哪些行业和主体，取决于被修改、被废止法规的适用范围，现有材料未逐一列明。
 
 <details><summary>参考链接</summary>
 <ul>
+<li><a href="http://paper.people.com.cn/rmrb/pc/attachement/202603/03/61aa07df-278b-41c4-b27a-32c354098c89.pdf">paper.people.com.cn/rmrb/pc/attachement/202603/03/61aa07df-278...</a></li>
 <li><a href="https://news.gmw.cn/2026-08/14/content_38942991.htm">news.gmw.cn/ 2026 -08/14/content_38942991.htm</a></li>
-<li><a href="https://www.gov.cn/zhengce/zhengceku/202608/content_7077981.htm">国务院关于修改和废止部分行政法规的决定_国务院文件_中国政府网</a></li>
 
 </ul>
 </details>
@@ -210,323 +145,278 @@ rss · 中国政府网·政策文件 · 11月4日 16:00
 <a id="item-policy-2"></a>
 ### [国务院批复辽宁等 9 省区国家级自然保护区与风景名胜区整合优化方案](https://www.gov.cn/zhengce/content/202611/content_7085109.htm) ⭐️ 6.0/10
 
-国务院对辽宁等 9 省区的国家级自然保护区和国家级风景名胜区整合优化方案作出批复，同意相关方案。批复以国务院文件形式发布，涉及辽宁等 9 省区的国家级自然保护区与国家级风景名胜区，属于具有约束力的规划审批决定。由于公开文本仅含标题，方案的具体范围、调整内容、实施时间及配套要求尚不明确。
+国务院对辽宁等 9 省区的国家级自然保护区和国家级风景名胜区整合优化方案作出批复，同意相关方案。批复以国务院文件形式发布，涉及 9 个省区的国家级自然保护区与国家级风景名胜区，属于已作出的行政决定，而非征求意见稿或拟议计划。由于公开内容仅含标题，具体方案内容、实施时间表及配套要求尚未披露。
 
 rss · 中国政府网·政策文件 · 11月4日 16:00
 
-**「背景」** 中国自 2019 年起推进自然保护地体系改革，将原有的自然保护区、风景名胜区等各类保护地整合归并为以国家公园为主体的自然保护地体系，并要求各地编制整合优化方案逐级报批。此次国务院批复辽宁等 9 省区的国家级自然保护区和国家级风景名胜区整合优化方案，属于上述改革中地方方案审批环节的一环。
+**「背景」** 国务院此前已部署对全国自然保护地体系进行整合优化，要求解决自然保护区内历史遗留的交叉重叠、边界不清等问题，并推动自然保护地与生态保护红线衔接。此次批复的辽宁等 9 省区方案，属于该整合优化工作分批审核、逐省批复的组成部分。
 
-**「影响」** 由于所提供的内容仅有批复标题，未披露整合优化方案的具体范围、调整地块或生效时间，目前无法确认对辽宁等 9 省区相关保护区、风景名胜区及周边用地主体的具体合规义务或经营限制。相关地方政府、保护区管理机构和景区运营方需以国务院批复所附方案及后续主管部门发布的实施文件为准，评估自身涉及的边界调整与管控要求。
+**「对相关省区保护区与风景名胜区管理的影响」** 该批复意味着辽宁等 9 省区的国家级自然保护区和国家级风景名胜区将按整合优化方案调整区域范围与管控分区。根据国务院公报中的自然保护区管理规范，国家级自然保护区的名称、区域范围和管控分区须由国务院审批，因此相关地方在界线标志设置、分区管控和后续开发活动上需以获批方案为准。由于公开内容未披露具体方案细节，各地实际调整幅度及对当地旅游、建设项目的具体限制尚不明确。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="http://www.isenlin.cn/sf_8378FCE9917D4EF785C0C8B1F07D4ADC_209_99B37F1E686.html">关于全 国 自 然 保 护 地 整 合 优 化 调 整 情况的公示 - 关注森林</a></li>
+<li><a href="https://www.gov.cn/gongbao/2026/issue_12566/material/gwygb202605.pdf">gov.cn/gongbao/ 2026 /issue_12566/material/gwygb202605.pdf</a></li>
 
 </ul>
 </details>
 
-**标签**: `#China`, `#State Council`, `#policy approval`, `#nature reserves`, `#scenic areas`, `#conservation`, `#regulation`
+**标签**: `#China`, `#State Council`, `#nature reserves`, `#scenic areas`, `#conservation policy`, `#regulatory approval`
 
 ---
 
 ## GitHub 热门
 
 <a id="item-github-1"></a>
-### [DeepSeek 官方推理框架 DeepInfer 获超 2.5 万星](https://github.com/deepseek-ai/DeepInfer) ⭐️ 9.0/10
+### [DeepSeek 官方推理框架 DeepInfer 获约 2.56 万星](https://github.com/deepseek-ai/DeepInfer) ⭐️ 8.0/10
 
-deepseek-ai/DeepInfer 是 DeepSeek 官方推出的高性能、大规模推理框架，专为 DeepSeek 系列模型设计，仓库已获得 25,643 颗星。项目由 DeepSeek 官方组织 deepseek-ai 维护，标签涵盖推理、LLM 与框架。目前公开信息仅有一句项目描述，具体实现语言、版本与功能细节尚未披露。
+deepseek-ai/DeepInfer 是 DeepSeek 官方推出的高性能、大规模推理框架，专门面向 DeepSeek 系列模型。该仓库由 deepseek-ai 组织发布，在 GitHub 上已获得约 25645 颗星，显示出开发者社区的高度关注。现有信息仅包含项目定位与星标数，未披露具体能力、基准测试或采用情况。
 
 github · deepseek-ai · 11月3日 07:31
 
-**「背景」** 大模型部署通常需要自行拼装推理引擎、批处理与并行调度等组件，官方推理栈能减少适配成本。DeepInfer 的定位是为 DeepSeek 模型提供开箱即用的大规模推理方案，与模型发布方形成配套生态。
+**「背景」** 随着大模型在生产环境中部署，如何高效地完成大规模推理服务成为关键工程问题。DeepInfer 以官方框架的身份出现，意在为 DeepSeek 模型提供配套的推理基础设施，减少开发者自行搭建服务栈的成本。
 
-**「影响」** 对计划在生产环境部署 DeepSeek 模型的开发者而言，官方推理框架提供了一个可直接评估的参考实现，可能影响其推理栈选型；不过由于公开资料有限，其实际性能与兼容性仍需进一步验证。
+**「影响」** 对使用 DeepSeek 模型的团队而言，官方推理框架提供了一个可直接评估的标准化服务方案，可能影响其推理栈的选型；约 2.56 万星标也表明该方向在开源社区具有较高关注度。
 
-**标签**: `#inference`, `#deepseek`, `#llm`, `#framework`, `#github`
+**标签**: `#inference`, `#deepseek`, `#llm-serving`, `#ai-infrastructure`, `#github`
 
 ---
 
 <a id="item-github-2"></a>
-### [DeepSeek AI 发布自主智能体系统原型 dsh-superagent-prototype](https://github.com/deepseek-ai/dsh-superagent-prototype) ⭐️ 8.0/10
+### [deepseek-ai 发布 dsh-superagent-prototype，获约 2.1 万星](https://github.com/deepseek-ai/dsh-superagent-prototype) ⭐️ 8.0/10
 
-deepseek-ai/dsh-superagent-prototype 是 DeepSeek AI 在 GitHub 上发布的一个自主智能体系统原型仓库，其标语为“Towards a More Autonomous Agent System”。该仓库已获得 21,017 颗星，显示出开发者社区对自主智能体方向的强烈关注。不过，目前公开内容仅有这一句标语，关于其具体功能、所用编程语言以及发布成熟度的细节尚不可知。
+deepseek-ai/dsh-superagent-prototype 是 deepseek-ai 在 GitHub 上发布的智能体系统原型仓库，其标语为“Towards a More Autonomous Agent System”（迈向更自主的智能体系统）。该仓库已获得约 21,038 颗星，显示出开发者社区的快速且大规模的关注。不过，目前提供的资料仅有这一句标语，尚未披露具体功能、所用编程语言或版本发布信息，因此其热度主要来自星标数量和所属机构的声誉，而非已验证的能力。
 
 github · deepseek-ai · 11月3日 09:29
 
-**「背景」** 自主智能体是当前 AI 生态中的热门方向，开发者希望让模型能够自主规划并执行多步骤任务，而不再只是被动响应单轮指令。DeepSeek AI 以模型研发著称，此次以原型形式开源相关系统，意在探索更自主的智能体架构。
+**「背景」** 自主智能体（autonomous agent）是当前 AI 应用开发的热点方向，开发者需要可参考的系统架构与实现原型来构建能自主规划、调用工具并完成多步任务的智能体。deepseek-ai 作为知名 AI 机构发布此类原型，容易吸引希望跟进其智能体设计思路的开发者关注。
 
-**「影响」** 该仓库在信息极为有限的情况下仍迅速积累超过 2.1 万颗星，说明 DeepSeek AI 的品牌影响力与自主智能体话题的结合能快速吸引开发者关注；但项目是否具备可用的代码与文档，仍需等待后续公开内容来验证。
+**「影响」** 该仓库在缺乏详细文档的情况下仍迅速积累约 2.1 万星，说明知名 AI 机构发布的智能体原型本身就能成为开发者观察和讨论自主智能体设计的重要入口。
 
-**标签**: `#github`, `#deepseek-ai`, `#autonomous-agents`, `#ai`, `#prototype`
+**标签**: `#github`, `#deepseek-ai`, `#ai-agents`, `#autonomous-agents`, `#prototype`, `#high-stars`
 
 ---
 
 <a id="item-github-3"></a>
-### [dsh-Go：手机运行 DeepSeek Harness 并遥控电脑](https://github.com/ccch1mneyyy/dsh-Go) ⭐️ 8.0/10
+### [seedds/nxnative：将 Switch 游戏转为 iOS 原生 IPA](https://github.com/seedds/nxnative) ⭐️ 8.0/10
 
-ccch1mneyyy/dsh-Go 是一个 DeepSeek Harness 项目，目标是让用户在手机本机运行该工具，同时还能远程遥控自己的电脑。仓库在 GitHub 上已获得约 15,317 颗星，显示出较强的开发者关注度。不过现有信息仅有一句项目描述，未提供编程语言、发布说明或星标增长数据，因此其技术栈与近期动态尚无法确认。
+seedds/nxnative 是一个获得 13,545 颗星的 GitHub 项目，目标是把 Switch 游戏的 NSP 文件夹转换为可在 iPhone、iPad 和 Mac 上运行的非签名 IPA。其技术路径包括 NSO 重写、Horizon HLE 宿主环境，以及将 NVN 图形接口翻译为 Metal。项目由 seedds 发布，处于模拟器与原生平台工具的交汇处，高星数反映出开发者社区的强烈关注。
 
-github · ccch1mneyyy · 11月8日 11:07
+github · seedds · 11月8日 11:47
 
-**「背景与定位」** DeepSeek 模型在开发者中流行后，围绕其搭建的本地运行与调用工具逐渐增多。dsh-Go 试图把这类 harness 从桌面环境延伸到手机端，并叠加对电脑的远程控制能力，解决移动场景下使用与操作 LLM 工具链的问题。
+**「背景与定位」** Switch 游戏通常依赖专有硬件与系统环境，无法直接在 Apple 设备上运行。该项目尝试通过重写可执行文件、提供系统层兼容宿主并转换图形调用，绕开完整模拟器的路径，让游戏以接近原生的方式在 iOS 与 macOS 上启动。
 
-**「对开发者的意义」** 该项目的高星标数表明，将 LLM 工具链搬到手机并兼顾远程操作电脑，是不少开发者关心的使用场景；但仅凭当前描述无法判断其实际功能完整度与生态影响。
-
-**标签**: `#github`, `#deepseek`, `#llm-tooling`, `#mobile`, `#remote-control`, `#developer-tools`
-
----
-
-<a id="item-github-4"></a>
-### [storytold/craft-anything：理解并复刻任意软件](https://github.com/storytold/craft-anything) ⭐️ 7.0/10
-
-storytold/craft-anything 是 GitHub 上一个获得约 21,650 颗星的高热度仓库，其定位是帮助开发者理解任意软件的工作原理，并据此打造自己的版本。该仓库由 storytold 发布，发布于 2026 年 11 月 8 日。目前公开信息仅有一句项目简介，未披露所用编程语言、具体功能实现或发布动态，因此其高星数更多反映开发者对这一通用命题的强烈兴趣。
-
-github · storytold · 11月8日 00:33
-
-**「背景」** 阅读和拆解现有软件一直是开发者学习架构与实现思路的重要途径，但面对大型或文档稀缺的项目时，理解成本往往很高。craft-anything 试图把“看懂软件”与“动手复刻”结合起来，切入的正是软件逆向理解与学习型重建这一需求场景。
-
-**「影响」** 该项目以“理解任意软件并自行构建”为卖点迅速积累约 2.1 万星，说明开发者对系统化拆解与复刻工具存在明显需求；不过由于缺少语言、版本和实际功能等细节，目前尚无法判断其能否真正支撑这一承诺。
-
-**标签**: `#github`, `#developer-tools`, `#software-analysis`, `#high-stars`
-
----
-
-<a id="item-github-5"></a>
-### [seedds/nxnative：将 Switch 游戏打包为 iOS 与 Mac 应用](https://github.com/seedds/nxnative) ⭐️ 7.0/10
-
-seedds/nxnative 是一个获得约 13,533 颗星的 GitHub 项目，目标是在 iPhone、iPad 和 Mac 上原生运行 Switch 游戏。它把 NSP 文件夹转换为未签名的 IPA，技术栈包括 NSO 重写器、Horizon HLE 宿主以及 NVN 到 Metal 的转换层。仓库由 seedds 发布，来源仅提供了一句简短描述，没有发布说明、增长数据或功能验证信息。
-
-github · seedds · 11月8日 09:01
-
-**「背景」** Switch 游戏依赖任天堂专有的 Horizon 系统与 NVN 图形接口，无法直接在 Apple 设备上运行。该项目试图通过重写可执行文件、在宿主层模拟系统服务，并把图形调用翻译到 Metal，从而绕开这些平台限制。
-
-**「影响」** 若该方案可行，开发者将获得一条把 Switch 游戏内容迁移到 Apple 平台的参考路径，涉及 NSO 重写、HLE 宿主和 NVN 到 Metal 翻译等可复用的技术组件；但现有证据仅为项目自述，尚未验证其实际运行效果。
+**「潜在影响」** 若该方案可行，开发者将获得一条把主机游戏移植到 Apple 平台的工具链参考，尤其是 NVN 到 Metal 的翻译与 Horizon HLE 宿主设计，可能被其他跨平台兼容项目借鉴。不过目前公开细节有限，实际兼容性与稳定性尚待验证。
 
 **标签**: `#github`, `#emulation`, `#nintendo-switch`, `#ios`, `#macos`, `#metal`, `#homebrew`
 
 ---
 
+<a id="item-github-4"></a>
+### [openidea：用 Rust 重建 IntelliJ 风格 IDE](https://github.com/l0ng-ai/openidea) ⭐️ 8.0/10
+
+l0ng-ai/openidea 是一个用 Rust 构建的原生 IDE，采用 IntelliJ IDEA 风格的快捷键映射、工具窗口和全局搜索，集成了编辑器、代码洞察、调试器、Git、终端、数据库与 HTTP 客户端，支持 60 多种语言。该仓库目前获得约 7,747 颗星，作者为 l0ng-ai。
+
+github · l0ng-ai · 11月8日 11:42
+
+**「背景与定位」** 许多开发者习惯 IntelliJ 系列 IDE 的交互方式，但这类基于 JVM 的工具在启动速度和资源占用上常受诟病。openidea 试图在保留熟悉操作体验的同时，借助 Rust 原生应用获得更快的响应，并把编辑、调试、版本控制、数据库等常用能力整合到同一工具中。
+
+**「对开发者的意义」** 对于希望摆脱重型 JVM IDE、又不想放弃 IntelliJ 式工作流的开发者，openidea 提供了一个 Rust 原生的替代选项，其 60 多种语言支持也降低了跨语言项目的工具切换成本。不过现有信息未披露发布历史与成熟度信号，实际稳定性仍需进一步验证。
+
+**标签**: `#ide`, `#rust`, `#developer-tools`, `#code-editor`, `#debugger`, `#git`, `#open-source`
+
+---
+
+<a id="item-github-5"></a>
+### [Gathin23/cleanyourtv：通过 Wi-Fi 精简 Android TV 并改造主屏](https://github.com/Gathin23/cleanyourtv) ⭐️ 7.0/10
+
+Gathin23/cleanyourtv 是 Gathin23 在 GitHub 上发布的开源项目，目前获得 54,261 颗星。该项目用于通过 Wi-Fi 对 Android TV 和 Google TV 设备进行去臃肿（debloat）处理，并可将主屏改为 Apple TV 风格。仓库描述简短，未提供发布版本或增长数据，主要语言等信息也未在现有材料中说明。
+
+github · Gathin23 · 11月8日 07:46
+
+**「背景」** Android TV 和 Google TV 设备通常预装大量厂商应用与服务，用户希望在不刷机的情况下精简系统并调整界面。该项目把去臃肿和主屏定制合并为通过 Wi-Fi 远程操作的工具，降低了普通用户改造电视系统的门槛。
+
+**「影响」** 该项目的高星数表明，无需 root 或刷机、仅靠网络连接即可清理电视预装软件并更换主屏的需求受到广泛关注，为 Android TV 用户提供了可参考的开源实现。
+
+**标签**: `#android-tv`, `#google-tv`, `#debloat`, `#customization`, `#open-source`
+
+---
+
 <a id="item-github-6"></a>
-### [heydamir/unslop：将 AI 生成界面打磨成设计感 UI 的 Claude 技能](https://github.com/heydamir/unslop) ⭐️ 7.0/10
+### [dsh-Go：把 DeepSeek Harness 装进口袋](https://github.com/ccch1mneyyy/dsh-Go) ⭐️ 7.0/10
 
-heydamir/unslop 是作者 heydamir 发布在 GitHub 上的一个 Claude 技能，目标是把“vibecoded”、带有明显 AI 痕迹的界面改造成经过设计的界面。该仓库目前获得约 11,590 颗星，说明开发者对这一具体场景有较强兴趣。现有信息仅包含一句项目描述，未提供发布版本、增长曲线或具体实现细节。
+ccch1mneyyy/dsh-Go 是一个 DeepSeek Harness 项目，目标是让用户在手机本机运行该工具，同时还能远程遥控自己的电脑。仓库当前获得约 15,419 颗星，显示出较强的开发者关注度。不过现有信息仅有一句项目描述，未提供编程语言、发布版本或增长轨迹等细节。
 
-github · heydamir · 11月1日 16:46
+github · ccch1mneyyy · 11月8日 12:18
 
-**「背景」** 随着 AI 辅助编码普及，快速生成的界面往往能跑通但缺乏统一的设计语言，开发者需要额外投入时间做视觉与交互打磨。unslop 以 Claude 技能的形式切入这一环节，试图在 AI 生成代码之后补上设计整理步骤。
+**「背景」** DeepSeek 模型在开发者社区中广泛使用，围绕其搭建的本地运行与工具调用框架（harness）也随之增多。dsh-Go 试图把这类能力从桌面延伸到移动端，解决在手机上直接运行并远程操作电脑的需求。
 
-**「影响」** 该项目的高星数表明，把设计打磨作为 AI 编码工作流中的独立环节，已成为一部分开发者愿意尝试的实践方向。
+**「影响」** 若项目按描述可用，开发者将能在手机上本地运行 DeepSeek Harness 并远程控制电脑，为移动场景下的模型调试与自动化操作提供一种新选择；但目前缺乏语言、版本与功能验证信息，实际可用性尚待确认。
 
-**标签**: `#github`, `#claude-skill`, `#ai-ui`, `#developer-tools`, `#design`
+**标签**: `#github`, `#deepseek`, `#llm-tooling`, `#mobile`, `#remote-control`, `#developer-tools`
 
 ---
 
 <a id="item-github-7"></a>
-### [aerial-tv：为国产电视打造的无广告 tvOS 风格桌面](https://github.com/pengchujin/aerial-tv) ⭐️ 7.0/10
+### [heydamir/unslop：将 AI 生成的界面转化为设计感 UI 的 Claude 技能](https://github.com/heydamir/unslop) ⭐️ 7.0/10
 
-pengchujin/aerial-tv 是一个参照 tvOS 设计的开源 Android TV 桌面启动器，面向小米、TCL 等中国市场的电视，主打无广告，并可在开机后自动接管桌面。该项目在 GitHub 上已获得约 10,670 颗星，属于近期增长较快的仓库。
+heydamir/unslop 是一个 Claude 技能项目，作者为 heydamir，目前获得 11,616 颗星。它的目标是把“vibecoded”、带有明显 AI 生成痕迹的界面改造成经过设计的界面。项目以 Claude 技能的形式提供，属于 AI 辅助 UI 设计方向的开发者工具。较高的星标数表明开发者对这一实用场景有较强兴趣。
 
-github · pengchujin · 11月8日 07:54
+github · heydamir · 11月1日 16:46
 
-**「背景」** 国内不少 Android 电视的出厂桌面带有广告和繁杂推荐内容，用户难以获得简洁的入口体验。aerial-tv 以开源方式提供替代桌面，直接针对这一具体痛点。
+**「背景」** 随着 AI 编程工具普及，大量界面由模型快速生成，往往带有模板化、缺乏设计细节的“AI 味”。unslop 针对这一问题，尝试在 Claude 工作流中直接对这类界面进行设计化处理，减少开发者手工返工的成本。
 
-**「影响」** 对小米、TCL 等国产 Android TV 用户而言，该项目提供了一种可自行安装、开机即生效的无广告桌面方案，减少了对厂商默认桌面的依赖。
+**「影响」** 该项目把 UI 设计优化嵌入 Claude 技能体系，使开发者可以在生成代码的同一流程中改善界面质量，而无需切换到独立的设计工具。
 
-**标签**: `#android-tv`, `#launcher`, `#open-source`, `#tvOS-style`, `#china-market`, `#github`
+**标签**: `#github`, `#claude-skill`, `#ai`, `#ui-design`, `#developer-tools`
 
 ---
 
 <a id="item-github-8"></a>
-### [openidea：用 Rust 重建的 IntelliJ 风格 IDE](https://github.com/l0ng-ai/openidea) ⭐️ 7.0/10
+### [aerial-tv：为国产电视打造无广告 tvOS 风格桌面](https://github.com/pengchujin/aerial-tv) ⭐️ 7.0/10
 
-l0ng-ai/openidea 是一个用 Rust 编写的原生 IDE，目前获得 7,739 颗星。它复刻了 IntelliJ IDEA 风格的快捷键映射、工具窗口和全局搜索，并在一个快速的原生应用中集成了编辑器、代码洞察、调试器、Git、终端、数据库和 HTTP 客户端，支持 60 多种语言。该项目以 Rust 技术栈切入桌面 IDE 领域，凭借对 IntelliJ 使用习惯的兼容和原生性能吸引开发者关注。
+pengchujin/aerial-tv 是一个参照 tvOS 设计的开源 Android TV 桌面启动器，主打无广告，并可在开机后自动接管桌面。项目面向小米、TCL 等中国市场的电视，用于替代预装启动器，目前在 GitHub 上已获得 10,685 颗星。
 
-github · l0ng-ai · 11月8日 11:13
+github · pengchujin · 11月8日 07:54
 
-**「背景」** 主流 IDE 长期以 Java 或 Electron 技术栈为主，启动速度和内存占用常被开发者诟病。openidea 试图用 Rust 的原生性能保留 IntelliJ 的操作习惯，同时把编辑、调试、版本控制、数据库和 HTTP 调试等常用工具整合进单一应用。
+**「背景」** 不少面向中国市场的 Android 电视预装启动器带有广告和推荐内容，用户难以获得简洁的桌面体验。aerial-tv 以开源方式提供 tvOS 风格的替代桌面，直接针对这一使用痛点。
 
-**「影响」** 对习惯 IntelliJ 快捷键的开发者而言，openidea 提供了一条无需改变操作习惯即可尝试 Rust 原生 IDE 的路径；其 60 多种语言支持和内置数据库、HTTP 客户端也意味着它可能减少在多个工具间切换的需要。不过，现有信息未提供发布历史、增长曲线或实际采用证据，其成熟度和稳定性仍待观察。
+**「影响」** 对于小米、TCL 等电视用户，该项目提供了一条可自行安装、开机自动接管桌面的无广告方案，减少了对厂商预装启动器的依赖。
 
-**标签**: `#rust`, `#ide`, `#developer-tools`, `#open-source`, `#github`
+**标签**: `#android-tv`, `#launcher`, `#open-source`, `#tvOS-style`, `#ad-free`, `#china-market`, `#github`
 
 ---
 
 <a id="item-github-9"></a>
-### [Mika：Android 端侧 AI 智能体获 7679 星](https://github.com/wangzan101/Mika) ⭐️ 7.0/10
+### [Mika：Android 端侧 AI 智能体获 7683 星](https://github.com/wangzan101/Mika) ⭐️ 7.0/10
 
-wangzan101/Mika 是一个面向 Android 的端侧 AI 智能体，可在设备本地操作各类应用与网页，替用户完成任务。该仓库在 GitHub 上已获得 7679 颗星，显示出开发者对这一方向的明显关注。项目以 Android 为主要平台，标签涵盖 AI 智能体、端侧运行与自动化。目前公开信息仅为一句项目描述，尚无版本发布、增长曲线或技术实现细节可供进一步核实。
+wangzan101/Mika 是一个面向 Android 的端侧 AI 智能体项目，可在设备本地操作应用与网页，替用户完成具体任务。该仓库由 wangzan101 创建，在 GitHub 上已获得 7683 颗星，标签涵盖 android、ai-agent、on-device、automation 与 mobile。项目描述较为简短，未披露具体技术栈、版本发布或成熟度信息，因此其实际能力边界仍有待进一步了解。
 
 github · wangzan101 · 11月7日 17:31
 
-**「背景与定位」** 移动端自动化长期依赖脚本或无障碍服务，配置门槛较高且难以跨应用协同。Mika 试图用 AI 智能体直接理解并操作应用界面与网页，把“让手机自己完成任务”变成通用能力。端侧运行意味着推理在本地完成，这与云端智能体形成不同的隐私与延迟取舍。
+**「背景与定位」** 移动端自动化长期依赖脚本、无障碍服务或人工操作，而将 AI 智能体直接部署在手机本地，则有望在保护隐私、降低延迟的前提下完成跨应用与网页的任务编排。Mika 正处于端侧移动智能体这一细分方向，该方向对开发者具有较强吸引力，但项目公开信息有限，尚难判断其与同类方案的差异。
 
-**「对开发者的意义」** 该项目的高星数表明，Android 端侧智能体已成为开发者关注的具体方向，可能吸引更多人探索在本地设备上驱动应用与网页自动化的实现方式。不过，由于缺少发布记录与技术细节，其实际能力与可复用程度尚无法从现有信息判断。
+**「潜在影响」** 该项目的高星数表明，开发者对“在手机本地运行、可操作应用与网页的 AI 智能体”存在明显关注，这可能推动更多团队探索端侧智能体的权限模型与自动化接口设计；不过目前缺乏发布记录与社区讨论佐证，其实际生态影响仍不确定。
 
-**标签**: `#android`, `#ai-agent`, `#on-device`, `#automation`, `#github`
+**标签**: `#android`, `#ai-agent`, `#on-device`, `#automation`, `#mobile`, `#open-source`
 
 ---
 
 <a id="item-github-10"></a>
-### [MacNativeGames：在 Apple 芯片上原生运行《王国之泪》](https://github.com/ly05010419/MacNativeGames) ⭐️ 7.0/10
+### [MacNativeGames：在 Apple 芯片上原生运行塞尔达传说](https://github.com/ly05010419/MacNativeGames) ⭐️ 7.0/10
 
-MacNativeGames 是 ly05010419 发布在 GitHub 上的开源项目，已获得 7,295 颗星。它让用户可以在 Apple 芯片的 Mac、iPhone 和 iPad 上原生运行《塞尔达传说：王国之泪》与《旷野之息》。其做法并非模拟器：游戏的 ARM64 代码被直接执行，NVN 图形接口则在 Metal 上重新实现，用户需自备游戏。
+MacNativeGames 是 GitHub 用户 ly05010419 发布的开源项目，目前获得 7299 颗星。它让用户在 Apple 芯片的 Mac、iPhone 和 iPad 上原生运行《塞尔达传说：王国之泪》和《旷野之息》。项目并非模拟器：游戏的 ARM64 代码直接执行，NVN 图形接口被重建在 Metal 之上，用户需自备游戏本体。
 
 github · ly05010419 · 11月6日 07:36
 
-**「背景」** 在 Apple 芯片设备上运行 Nintendo Switch 游戏通常依赖模拟器，需要模拟 CPU 与图形接口，开销较大。该项目尝试绕过模拟层，直接执行游戏的 ARM64 指令，并把 Switch 的 NVN 图形 API 映射到 Metal，从而在 macOS 与 iOS/iPadOS 上获得更接近原生的运行方式。
+**「背景」** 在 Apple 芯片设备上运行 Nintendo Switch 游戏通常依赖模拟器，需要转译指令并模拟图形接口，性能和兼容性都受限。该项目尝试绕过模拟层，直接执行游戏的 ARM64 代码，并用 Metal 重新实现 NVN，从而在 macOS 与 iOS 生态中提供更接近原生的运行路径。
 
-**「影响」** 该项目展示了以 Metal 重建专有图形接口、直接执行 ARM64 游戏代码的可行路径，为 Apple 平台上的游戏移植与自制软件社区提供了一个不同于模拟器的技术参考；不过现有信息未说明其成熟度与兼容性范围。
+**「影响」** 该项目展示了以“重建图形接口 + 直接执行 ARM64 代码”替代传统模拟的可行路线，为 Apple 芯片上的游戏兼容性研究提供了可参考的实现；不过项目要求用户自备游戏，且公开信息中对其成熟度与稳定性描述有限。
 
-**标签**: `#github`, `#apple-silicon`, `#metal`, `#gaming`, `#nintendo-switch`, `#native-execution`, `#macos`, `#ios`
+**标签**: `#github`, `#apple-silicon`, `#metal`, `#gaming`, `#native-execution`, `#nintendo-switch`, `#macos`, `#ios`
 
 ---
 
 <a id="item-github-11"></a>
 ### [android-ad-cleaner：免 root 关闭国产安卓系统广告](https://github.com/rddmwmddr/android-ad-cleaner) ⭐️ 7.0/10
 
-rddmwmddr/android-ad-cleaner 是一个面向国产安卓手机的开源工具，用于关闭系统内置广告、热搜、资讯推荐和营销推送。项目由 rddmwmddr 发布，主打免 root、可还原，并支持 AI 智能体一键执行。该仓库在 GitHub 上已获得 7063 颗星，说明不少用户对系统级广告清理有实际需求。
+rddmwmddr/android-ad-cleaner 是一个面向国产安卓手机的系统级广告清理工具，可关闭系统界面中的广告、热搜、资讯推荐和营销推送。项目主打免 root、可还原，并支持 AI 智能体一键执行，目前在 GitHub 上获得 7,076 颗星。
 
-github · rddmwmddr · 11月8日 08:21
+github · rddmwmddr · 11月8日 12:10
 
-**「背景」** 国产安卓 ROM 常把广告和资讯推荐嵌入系统应用与推送通道，普通用户难以逐项关闭，而 root 或刷机方案又会带来保修与安全风险。该项目以非侵入、可逆的方式处理这些系统入口，降低了普通用户清理系统广告的门槛。
+**「背景」** 国产安卓定制系统常内置广告、热搜与资讯推荐等营销内容，用户手动逐项关闭既繁琐又难以彻底。该项目以不获取 root 权限、操作可逆的方式集中处理这些开关，降低了普通用户清理系统推广内容的门槛。
 
-**「影响」** 对开发者而言，这个项目提供了一个可参考的免 root 系统设置修改思路，并展示了用 AI 智能体自动执行配置操作的落地方式；其 7063 颗星也表明，系统广告治理是国产安卓生态中受关注的实际问题。
+**「影响」** 对开发者而言，该项目提供了一种免 root、可回滚的系统设置批量调整思路，并支持由 AI 智能体代为执行，便于在隐私与去广告场景中复用或二次开发。
 
-**标签**: `#android`, `#ad-blocking`, `#privacy`, `#utility`, `#open-source`
+**标签**: `#android`, `#ad-blocking`, `#privacy`, `#utility`, `#debloat`, `#chinese-ecosystem`
 
 ---
 
 <a id="item-github-12"></a>
 ### [learnharness：用于学习难题的智能体框架](https://github.com/amosblomqvist/learnharness) ⭐️ 7.0/10
 
-amosblomqvist/learnharness 是 GitHub 上的一个仓库，作者将其描述为“用于学习困难事物的智能体框架（agent harness）”。该仓库目前获得 6,304 颗星，标签涵盖 agent-harness、AI 智能体、学习与开发者工具。由于提供的资料仅有这一句描述，仓库的具体实现语言、功能细节与发布历史尚不明确。
+amosblomqvist/learnharness 是一个 GitHub 项目，自我描述为“用于学习困难事物的智能体框架（agent harness）”，目前获得 6,311 颗星。项目由 amosblomqvist 创建，标签涵盖 github、agent、ai 与 developer-tools。由于提供的资料仅有这一句描述，无法确认其具体实现语言、发布时间线或近期版本动态。
 
 github · amosblomqvist · 11月7日 07:50
 
-**「背景」** “智能体框架”通常指围绕大模型智能体搭建的脚手架，负责工具调用、流程编排与状态管理。learnharness 将这一模式指向“学习困难事物”的场景，试图把智能体能力用于辅助学习过程。
+**「背景」** “智能体框架（agent harness）”通常指围绕大模型智能体搭建的外围脚手架，负责工具调用、流程编排与状态管理。learnharness 的定位是把这类能力用于“学习困难事物”这一场景，但现有信息不足以说明它具体解决哪类学习任务或与哪些模型、工具集成。
 
-**「影响」** 该仓库已积累 6,304 颗星，说明“用智能体辅助学习”这一方向引起了开发者的关注；但现有证据不足以判断其实际采用情况或生态影响。
+**「影响」** 该项目已积累 6,311 颗星，说明它在开发者社区中获得了相当关注；不过由于缺少发布记录、增长数据和生态集成信息，目前无法判断这种关注是否已转化为实际采用或对智能体工具链的具体影响。
 
-**标签**: `#github`, `#agent-harness`, `#ai-agents`, `#learning`, `#developer-tools`
+**标签**: `#github`, `#agent`, `#ai`, `#developer-tools`
 
 ---
 
 <a id="item-github-13"></a>
-### [Lichii：实验性 Nintendo Switch 2 模拟器获 6252 星](https://github.com/zortos293/Lichii) ⭐️ 7.0/10
+### [Lichii：实验性 Nintendo Switch 2 模拟器获约 6300 星](https://github.com/zortos293/Lichii) ⭐️ 7.0/10
 
-zortos293/Lichii 是一个由开发者 zortos293 维护的 Nintendo Switch 2 模拟器项目，在 GitHub 上已获得 6252 颗星。仓库自述为“VERY experimental”（非常实验性），说明其仍处于早期探索阶段，尚未成熟。该项目的高关注度主要源于 Switch 2 模拟这一新兴且敏感的方向，以及社区对新一代主机模拟可能性的好奇。
+zortos293/Lichii 是一个由开发者 zortos293 发布的 Nintendo Switch 2 模拟器仓库，在 GitHub 上已获得约 6,291 颗星。仓库描述仅有一句“VERY experimental Nintendo Switch 2 emulator”，未说明所用编程语言、具体功能或成熟度。它之所以受到关注，主要因为 Switch 2 是较新的主机，针对它的模拟属于前沿方向，因而在模拟器与自制软件社区中引发兴趣。
 
-github · zortos293 · 11月8日 11:12
+github · zortos293 · 11月8日 12:03
 
-**「背景与定位」** 主机模拟器通常需要逆向分析硬件架构并重建运行环境，而针对刚发布不久的新一代主机开展模拟，往往面临文档匮乏、固件与加密机制未知等障碍。Lichii 以“非常实验性”自我定位，意味着它更接近技术验证而非可直接使用的产品。
+**「背景与定位」** 主机模拟器通常在新硬件上市后需要较长时间才能形成可用的开源实现，早期项目往往停留在实验阶段。Lichii 面向刚推出不久的 Switch 2，填补的是这一新兴平台上的探索空白，而非提供成熟可玩的模拟方案。
 
-**「对开发者的意义」** 对模拟器开发者和逆向工程爱好者而言，Lichii 提供了一个围绕 Switch 2 架构展开研究的公开代码入口，其星标数量也表明该方向存在明显的社区关注度；但由于项目明确标注为高度实验性，现阶段不宜将其视为可依赖的成熟模拟方案。
+**「对开发者的意义」** 由于项目自述为“非常实验性”且缺少功能与成熟度说明，开发者目前难以据此评估其实际可用性；其价值更多在于作为 Switch 2 模拟方向的早期公开参考，而非可直接依赖的工具。
 
-**标签**: `#emulator`, `#nintendo-switch-2`, `#experimental`, `#github`, `#open-source`
+**标签**: `#emulator`, `#nintendo-switch-2`, `#homebrew`, `#experimental`, `#github`
 
 ---
 
 <a id="item-github-14"></a>
-### [Jakeschincariol/day-trader-skill：11 个 Claude 日内交易技能](https://github.com/Jakeschincariol/day-trader-skill) ⭐️ 7.0/10
+### [storytold/craft-anything：理解任意软件并打造自己的版本](https://github.com/storytold/craft-anything) ⭐️ 6.0/10
 
-Jakeschincariol/day-trader-skill 是一个 GitHub 仓库，提供 11 个面向日内交易的 Claude 技能，功能涵盖扫描数千张图表、追踪突发新闻、把握每次进出场时机，以及在投入资金前复盘每次结果。该项目已获得 6065 颗星，显示出较强的开发者关注度。仓库描述未提供版本、发布或性能方面的证据。
+storytold/craft-anything 是 GitHub 上一个获得约 21,750 颗星的仓库，作者为 storytold。仓库目前仅提供一句简介：“理解任何软件如何运作，并打造你自己的版本”，未披露具体功能、技术栈或发布信息。其高星数表明开发者关注度较高，但由于公开信息有限，尚无法确认其实际能力与走红原因。
 
-github · Jakeschincariol · 10月20日 14:18
+github · storytold · 11月8日 00:33
 
-**「背景」** 该项目面向使用 Claude 进行日内交易的场景，把图表扫描、新闻追踪、进出场择时和结果复盘等环节封装为可复用的技能。它属于 AI 智能体工具生态的一部分，但受众相对较窄，主要是有意借助 Claude 辅助交易决策的用户。
+**「背景」** 该项目面向“理解现有软件并据此构建自己的实现”这一需求，属于开发者工具与软件理解方向。当前公开材料只有一句标语，缺少实现细节和生态定位说明，因此其具体解决的问题范围仍不明确。
 
-**「影响」** 该仓库获得 6065 颗星，表明将交易工作流拆解为 Claude 技能的做法已引起开发者关注，可能推动更多人尝试用 AI 智能体工具组织交易研究与复盘流程。
+**「影响」** 约 2.17 万颗星说明该仓库已吸引大量开发者注意，可能成为软件理解类工具讨论的入口；但在功能与技术栈公开之前，尚无法评估它对实际开发工作流的具体影响。
 
-**标签**: `#github`, `#claude-skills`, `#day-trading`, `#ai-agents`, `#developer-tools`
+**标签**: `#github`, `#developer-tools`, `#software-understanding`, `#high-stars`
 
 ---
 
 <a id="item-github-15"></a>
-### [Gathin23/cleanyourtv：通过 Wi-Fi 精简 Android TV 并改造主屏](https://github.com/Gathin23/cleanyourtv) ⭐️ 6.0/10
+### [Zagitta/gpu-unlock：解锁 GeForce 20/30/40 系列张量吞吐](https://github.com/Zagitta/gpu-unlock) ⭐️ 6.0/10
 
-Gathin23/cleanyourtv 是一个用于精简（debloat）Android TV 和 Google TV 设备的工具，可通过 Wi-Fi 连接操作，并能为设备应用类似 Apple TV 风格的主屏幕。该仓库由 Gathin23 发布，在 GitHub 上获得约 54,220 颗星标，但面向的是 Android TV/Google TV 用户这一相对小众的群体。现有信息未披露其编程语言、发布历史或星标增长轨迹。
+Zagitta/gpu-unlock 是一个面向 NVIDIA GeForce 20/30/40 系列显卡的 GPU 性能解锁工具，作者为 Zagitta。项目宣称可将 FP16、BF16 和 TF32 的张量吞吐提升至最高 2 倍，定位是让 GeForce 显卡在 AI 工作负载下跑出更高速度。该仓库在 GitHub 上已获得 18,018 颗星，显示出较强的开发者关注度。不过目前公开内容仅有宣传性标语，未提供编程语言、发布历史或维护状态等细节，性能提升幅度也尚未得到独立验证。
 
-github · Gathin23 · 11月8日 07:46
+github · Zagitta · 10月29日 02:30
 
-**「背景」** Android TV 和 Google TV 设备通常预装大量厂商应用，用户难以在不进行复杂操作的情况下清理系统并调整主屏体验。该项目把去预装和主屏定制整合为一个可通过 Wi-Fi 远程执行的实用工具，降低了这类设备改造的门槛。
+**「背景与问题」** NVIDIA 长期在消费级 GeForce 与专业级数据中心 GPU 之间做功能与性能分层，部分张量计算能力在 GeForce 上受到限制。此类解锁工具试图绕过这些限制，让个人开发者和小团队用消费级显卡承担 AI 推理等张量密集型任务。
 
-**「影响」** 对于希望摆脱预装软件、统一电视主屏风格的 Android TV/Google TV 用户，该工具提供了一条无需深度刷机即可操作的路径；其高星标数也表明这类设备精简与定制需求存在一定规模的关注度。
+**「潜在影响」** 若其宣称的 2 倍张量吞吐能够复现，使用 20/30/40 系列 GeForce 显卡的开发者可能以更低硬件成本获得更高的 AI 推理性能；但在缺乏可验证细节的情况下，实际收益与稳定性仍需谨慎评估。
 
-**标签**: `#android-tv`, `#google-tv`, `#debloat`, `#customization`, `#utility`
+**标签**: `#github`, `#gpu`, `#nvidia`, `#performance`, `#ai-inference`, `#tensor-throughput`
 
 ---
 
 <a id="item-github-16"></a>
-### [Zagitta/gpu-unlock：解锁 GeForce 张量吞吐](https://github.com/Zagitta/gpu-unlock) ⭐️ 6.0/10
+### [unclebob/ub-mode：拥有约 7.3k 星的 Emacs 模式](https://github.com/unclebob/ub-mode) ⭐️ 6.0/10
 
-Zagitta/gpu-unlock 是一个在 GitHub 上获得约 18,005 颗星的仓库，作者为 Zagitta。该项目声称可以解锁 GeForce 20/30/40 系列显卡上更高的 FP16、BF16 和 TF32 张量吞吐，宣传语称最高可达 2 倍。不过，目前提供的源内容仅有一段推广式描述，未给出实现方式、维护状态或实测数据，因此“2 倍”这一说法无法得到验证。
+unclebob/ub-mode 是 Robert C. Martin（unclebob）发布的一个 Emacs 模式仓库，在 GitHub 上获得约 7,279 颗星。该项目属于编辑器工具链方向，面向 Emacs 用户，标签涵盖 emacs、editor-tooling 与 developer-tools。现有信息未提供具体功能说明、版本发布或星标增长数据，因此其热度只能从星标规模判断。
 
-github · Zagitta · 10月29日 02:30
+github · unclebob · 11月2日 15:08
 
-**「背景与问题」** 在消费级 GeForce 显卡上运行 AI 训练与推理时，用户常关注 FP16、BF16、TF32 等低精度张量运算的实际吞吐。该项目针对 20/30/40 系列这一广泛使用的硬件区间，试图通过某种方式释放被限制的算力，从而回应开发者对性价比与性能的诉求。
+**「背景」** Emacs 用户通常通过各类 mode 扩展编辑体验，而由知名作者维护的配置类项目容易在社区内获得关注。ub-mode 正是在这一生态中出现的编辑器配置工具，但当前材料未说明它具体解决哪类编辑或工作流问题。
 
-**「潜在影响」** 若其宣称的吞吐提升能够被独立复现，持有 GeForce 20/30/40 系列显卡的开发者可能在不更换硬件的情况下获得更高的低精度张量运算性能；但在缺乏实现细节与实测证据前，这一收益仍属未经验证的说法。
+**「影响」** 约 7.3k 星标表明该项目在 Emacs 社区已有可观关注度，可能成为部分开发者评估或采用的编辑器扩展之一；不过由于缺少发布记录与增长数据，尚无法判断其实际采用规模或对生态的具体影响。
 
-**标签**: `#github`, `#gpu`, `#nvidia`, `#geforce`, `#machine-learning`, `#performance`, `#tensor-throughput`
+**标签**: `#emacs`, `#editor-tooling`, `#developer-tools`, `#github`
 
 ---
 
 <a id="item-github-17"></a>
-### [HeyPuter/everything：重建并开源世界软件的宏大项目](https://github.com/HeyPuter/everything) ⭐️ 6.0/10
+### [cn-math-taxonomy：对齐课标的中国 K-12 知识图谱数据集](https://github.com/xiaoyang111222/cn-math-taxonomy) ⭐️ 6.0/10
 
-HeyPuter/everything 是 HeyPuter 在 GitHub 上发布的一个仓库，目前获得 7,621 颗星。该仓库提供的唯一描述是一句宏大的宣言：从零开始重建并开源世界上的软件。除这一句标语外，现有信息没有说明项目的具体范围、所用编程语言、发布版本或实际交付物，因此其真实内容与进展尚无法核实。
-
-github · HeyPuter · 11月7日 01:55
-
-**「背景」** 开源生态中已有大量项目分别重写或替代特定软件，但宣称要“从零重建并开源世界全部软件”的表述极为宽泛。该仓库目前仅以一句标语呈现，缺乏可对照的技术路线或模块划分，难以判断它属于长期愿景、社区号召还是具体工程计划。
-
-**「影响」** 7,621 颗星表明该仓库已引起开发者关注，但在缺少代码结构、语言栈和交付物说明的情况下，开发者暂时无法据此评估其可用性或参与方式。
-
-**标签**: `#github`, `#open-source`, `#HeyPuter`, `#ambitious-project`, `#unverified`
-
----
-
-<a id="item-github-18"></a>
-### [unclebob/ub-mode：为自定义 ub 语言打造的 Emacs 主模式](https://github.com/unclebob/ub-mode) ⭐️ 6.0/10
-
-unclebob/ub-mode 是 Robert C. Martin（unclebob）为他自己设计的 ub 语言编写的 Emacs 主模式（major mode），目前获得约 7,276 颗星。该项目属于编辑器工具链，主要服务于使用 Emacs 并编写 ub 语言的开发者。其高星数更多来自作者本人的知名度，而非广泛的用户基础。
-
-github · unclebob · 11月2日 15:08
-
-**「背景」** Emacs 主模式为特定语言提供语法高亮、缩进和编辑辅助，是 Emacs 生态中扩展语言支持的标准方式。ub 是 unclebob 的个人自定义语言，因此该模式面向的是同时使用 Emacs 和 ub 语言的小众群体。
-
-**「影响」** 该项目为 ub 语言在 Emacs 中提供了官方风格的编辑支持，使这一个人语言具备基本的开发工具链；但其受众受限于 ub 语言的使用者，对更广泛的 Emacs 或开源生态影响有限。
-
-**标签**: `#emacs`, `#editor-tooling`, `#major-mode`, `#unclebob`, `#niche`
-
----
-
-<a id="item-github-19"></a>
-### [cn-math-taxonomy：中文 K-12 知识图谱与题库](https://github.com/xiaoyang111222/cn-math-taxonomy) ⭐️ 6.0/10
-
-xiaoyang111222/cn-math-taxonomy 是一个面向中文 K-12 教育的知识图谱项目，覆盖小学数学到高中数学、三年级到高中的英语以及初中物理，共包含 1644 个知识点、2403 条先修边和 6723 道题，并对齐课程标准，附带自适应前置诊断功能。该仓库在 GitHub 上获得约 7067 颗星，作者为 xiaoyang111222。其价值在于以结构化图谱和题库支撑自适应诊断学习，因此受到教育科技与自适应学习开发者的关注。
+xiaoyang111222/cn-math-taxonomy 是一个面向中国 K-12 教育的知识图谱数据集，覆盖小学数学到高中数学、三年级到高中的英语以及初中物理，共包含 1644 个知识点、2403 条先修边和 6723 道题目，并对齐课程标准，附带自适应前置诊断功能。该仓库在 GitHub 上获得约 7069 颗星，但来源信息未提供发布版本或增长数据。
 
 github · xiaoyang111222 · 11月7日 12:25
 
-**「背景与定位」** 自适应学习系统通常需要明确的知识点依赖关系与配套题目，才能判断学生的薄弱环节并推荐学习路径。该项目把中文课标下的数学、英语和物理知识点组织成带先修边的图谱，并附上题库，为构建诊断与推荐功能提供现成数据基础。
+**「背景与定位」** 教育科技开发者在构建自适应学习、题目推荐或学情诊断系统时，往往需要结构化的知识点关系与配套题库，而这类中文 K-12 数据通常分散或需要自行整理。该项目以知识图谱形式提供知识点、先修依赖和题目，降低了搭建课程对齐学习系统的前期数据成本。
 
-**「对开发者的意义」** 对教育科技开发者而言，这份包含 2403 条先修边和 6723 道题的结构化数据可直接用于搭建前置知识诊断、学习路径规划等自适应学习功能，减少从零梳理课标知识点与依赖关系的工作量。
+**「对开发者的意义」** 对于教育科技方向的开发者，该数据集可直接用于实现基于先修关系的自适应前置诊断和题目推荐，减少从零构建中文课程知识结构的工作量；其影响主要集中在这一细分领域，而非更广泛的通用开源生态。
 
-**标签**: `#education`, `#knowledge-graph`, `#edtech`, `#chinese`, `#curriculum`, `#adaptive-learning`
-
----
-
-<a id="item-github-20"></a>
-### [anhao/ai-pose-gallery-zh：零依赖中文 AI 姿势图库](https://github.com/anhao/ai-pose-gallery-zh) ⭐️ 6.0/10
-
-anhao/ai-pose-gallery-zh 是一个中文汉化的 AI 姿势参考图库，收录 1439 组、共 2878 张图片，以零依赖静态画廊的形式呈现，由作者 anhao 维护，仓库已获得 6404 颗星。项目采用静态站点方式组织内容，访问时无需额外依赖或后端服务。
-
-github · anhao · 11月4日 08:09
-
-**「背景」** AI 绘画工作流中，创作者常需要姿势参考来指导构图与人物动作，但分散的素材往往缺乏统一整理和中文说明。该项目把姿势参考图集中为可浏览的静态画廊，并完成完整汉化，降低了中文用户查找和使用的门槛。
-
-**「影响」** 对使用 AI 绘画工具的中文开发者与创作者而言，这个仓库提供了一份可直接浏览、无需搭建依赖的姿势参考集合，可作为本地或自托管素材库使用。其 6404 颗星也说明这类本地化素材整理在特定人群中存在实际需求。
-
-**标签**: `#github`, `#static-site`, `#image-gallery`, `#ai-art`, `#chinese-localization`, `#zero-dependency`
+**标签**: `#education`, `#knowledge-graph`, `#dataset`, `#chinese`, `#k12`, `#edtech`
 
 ---
