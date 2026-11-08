@@ -189,3 +189,22 @@ h1, h2, h3, h4, h5, h6 {
 .lang-section.hidden {
   display: none;
 }
+
+/* --- 移动端适配 --- */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .page-header { padding: 1.5rem 1rem 1rem; }
+  .project-name { font-size: 1.6rem; }
+  .project-tagline { font-size: 0.9rem; }
+  .main-content { padding: 1.25rem 1rem 2rem; }
+  .main-content h2 { font-size: 1.3rem; }
+  .main-content h3 { font-size: 1.1rem; }
+  .main-content > blockquote:first-of-type { margin: 0 0 1rem; padding: 0.5rem 0.75rem; }
+  /* 长 URL 换行，不撑破页面 */
+  .main-content details a,
+  .source-line { word-break: break-all; }
+  /* 代码 / 表格横向滚动 */
+  pre, code { white-space: pre-wrap; overflow-wrap: anywhere; }
+  table { display: block; overflow-x: auto; max-width: 100%; }
+  .lang-toggle { top: 8px; right: 8px; }
+}

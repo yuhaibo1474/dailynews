@@ -6,11 +6,14 @@
   var h2s = Array.prototype.slice.call(content.querySelectorAll('h2'));
   if (h2s.length === 0) return;
 
+  var isMobile = window.matchMedia('(max-width: 640px)').matches;
+
   // 1) 把每个 <h2> 及其后续内容包成一个 panel（直到下一个 <h2>）。
-  h2s.forEach(function (h2) {
+  h2s.forEach(function (h2, i) {
     var panel = document.createElement('section');
     panel.className = 'digest-panel';
     panel.setAttribute('data-panel', h2.textContent.trim());
+    panel.id = 'digest-panel-' + i;
     h2.parentNode.insertBefore(panel, h2);
 
     var node = h2;
@@ -32,7 +35,7 @@
   });
 
   // 3) 依据 panel 名称生成顶部导航标签。
-  var names = panels.map(function (p) { return p.getAttribute('data-panel'); });
+  var tabs = [];
   panels.forEach(function (panel) {
     var name = panel.getAttribute('data-panel');
     var btn = document.createElement('button');
@@ -40,19 +43,42 @@
     btn.className = 'digest-tab';
     btn.textContent = name;
     btn.setAttribute('data-panel', name);
-    btn.addEventListener('click', function () { activate(name); });
     nav.appendChild(btn);
+    tabs.push({ btn: btn, panel: panel });
   });
 
-  function activate(name) {
-    panels.forEach(function (p) {
-      p.style.display = (p.getAttribute('data-panel') === name) ? 'block' : 'none';
-    });
-    Array.prototype.slice.call(nav.querySelectorAll('.digest-tab')).forEach(function (b) {
-      b.classList.toggle('active', b.getAttribute('data-panel') === name);
+  function setActive(name) {
+    tabs.forEach(function (t) {
+      t.btn.classList.toggle('active', t.btn.getAttribute('data-panel') === name);
     });
   }
 
-  // 默认显示第一个板块（AI资讯）。
-  activate(names[0]);
+  if (isMobile) {
+    // 移动端：所有板块纵向堆叠，Tab 只做锚点跳转。
+    panels.forEach(function (p) { p.style.display = 'block'; });
+    tabs.forEach(function (t) {
+      t.btn.addEventListener('click', function () {
+        t.panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActive(t.btn.getAttribute('data-panel'));
+      });
+    });
+  } else {
+    // 桌面端：Tab 切换显隐。
+    tabs.forEach(function (t) {
+      t.btn.addEventListener('click', function () {
+        var name = t.btn.getAttribute('data-panel');
+        panels.forEach(function (p) {
+          p.style.display = (p.getAttribute('data-panel') === name) ? 'block' : 'none';
+        });
+        setActive(name);
+      });
+    });
+    // 默认显示第一个板块。
+    if (tabs.length) {
+      panels.forEach(function (p) {
+        p.style.display = (p === tabs[0].panel) ? 'block' : 'none';
+      });
+      setActive(tabs[0].btn.getAttribute('data-panel'));
+    }
+  }
 })();
